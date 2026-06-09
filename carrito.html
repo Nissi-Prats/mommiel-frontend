@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito | MomMiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section class="carrito-header">
+<h1>Tu Carrito de Compras</h1>
+</section>
+
+<section class="carrito">
+<div class="carrito-container">
+    
+    <div class="productos" id="lista-carrito">
+        <p style="text-align: center;">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="resumen">
+        <h2>Resumen del Pedido</h2>
+        <div class="linea"><span>Subtotal</span><span id="subtotal-txt">$0.00</span></div>
+        <div class="linea"><span>Envío</span><span id="envio-txt">$99.00</span></div>
+        <hr style="margin:20px 0;border:none;border-top:1px solid #eee;">
+        <div class="total" id="total-txt">$0.00</div>
+        <button class="btn-ver" style="width: 100%; text-align: center; margin-top: 20px; display: block; border: none; cursor: pointer;" onclick="irAlCheckout()">Proceder al Pago</button>
+    </div>
+
+</div>
+</section>
+
+<script>
+function renderizarCarrito() {
+    const contenedor = document.getElementById('lista-carrito');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = '<p style="text-align: center; padding: 20px;">Tu carrito está vacío ⛟. ¡Explora el catálogo!</p>';
+        document.getElementById('subtotal-txt').innerText = "$0.00";
+        document.getElementById('total-txt').innerText = "$0.00";
+        return;
+    }
+
+    contenedor.innerHTML = '';
+    let subtotal = 0;
+
+    carrito.forEach((item, index) => {
+        const precioItem = parseFloat(item.precio || item.precio_unitario || 0);
+        const costoItem = precioItem * item.cantidad;
+        subtotal += costoItem;
+
+        contenedor.innerHTML += `
+            <div class="producto" style="display: flex; gap: 20px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+                <div class="info">
+                    <h3>${item.nombre}</h3>
+                    <div class="precio">Precio Unitario: $${precioItem.toFixed(2)}</div>
+                    <div class="cantidad" style="margin: 10px 0;">
+                        <button onclick="cambiarCantidad(${index}, -1)" style="padding: 2px 8px;">-</button>
+                        <span style="margin: 0 10px; font-weight: bold;">${item.cantidad}</span>
+                        <button onclick="cambiarCantidad(${index}, 1)" style="padding: 2px 8px;">+</button>
+                    </div>
+                    <button class="eliminar" onclick="eliminarArticulo(${index})" style="background: #E8A7A1; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Eliminar</button>
+                </div>
+                <div style="margin-left: auto; font-weight: bold; align-self: center;">$${costoItem.toFixed(2)}</div>
+            </div>
+        `;
+    });
+
+    const envio = 0.00; 
+    document.getElementById('envio-txt').innerText = "¡Gratis!";
+    document.getElementById('envio-txt').style.color = "green";
+    document.getElementById('envio-txt').style.fontWeight = "bold";
+    
+    document.getElementById('subtotal-txt').innerText = `$${subtotal.toFixed(2)}`;
+    document.getElementById('total-txt').innerText = `$${(subtotal + envio).toFixed(2)}`;
+}
+
+function cambiarCantidad(index, cambio) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito[index].cantidad += cambio;
+
+    if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderizarCarrito();
+}
+
+function eliminarArticulo(index) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.splice(index, 1);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderizarCarrito();
+}
+
+// REDIRECCIÓN 
+function irAlCheckout() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    if (carrito.length === 0) {
+        alert("Agrega productos antes de pagar.");
+        return;
+    }
+
+    // Buscamos la clave exacta 'token_mommiel' que usa tu login
+    const token = localStorage.getItem("token_mommiel"); 
+
+    if (!token) {
+        // No está logueada -> Guardamos la ruta de regreso y mandamos al login
+        localStorage.setItem('destino_post_login', 'checkout.html');
+        
+        alert("¡Hola! Para poder ingresar tus datos de envío y procesar tu compra, necesitas iniciar sesión o registrar una cuenta.");
+        window.location.href = 'login.html';
+    } else {
+        // Sí inició sesión -> Pasa directo al checkout sin preguntar nada
+        window.location.href = 'checkout.html';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', renderizarCarrito);
+</script>
+</body>
+</html>

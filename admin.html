@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Administrativo | MomMiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{background:#FFF9F5; font-family: 'Poppins', sans-serif; margin: 0;}
+.admin-container{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+.sidebar{background:#C8A98D;padding:30px;color:white;}
+.sidebar h2{font-family:'Fredoka',sans-serif;margin-bottom:40px;font-size:32px; margin-top: 0;}
+.sidebar ul{list-style:none; padding: 0;}
+.sidebar li{margin-bottom:15px;}
+.sidebar a{color:white;text-decoration:none;display:block;padding:12px;border-radius:10px;transition:.3s;cursor:pointer;}
+.sidebar a:hover, .sidebar a.active{background:rgba(255,255,255,.2); font-weight: 500;}
+.main{padding:40px;}
+.header-admin{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+.header-admin h1 { margin: 0; font-family: 'Fredoka', sans-serif; color: #5D4B43; }
+.header-admin p { margin: 5px 0 0 0; color: #8A766D; }
+
+.dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.04); text-align: center; transition: 0.3s; text-decoration: none; color: inherit; display: block; cursor: pointer; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(199, 169, 141, 0.2); }
+.card i { font-size: 3rem; color: #C8A98D; margin-bottom: 15px; }
+.card h3 { font-family: 'Fredoka', sans-serif; color: #5D4B43; margin: 10px 0; font-size: 1.5rem; }
+.card p { color: #8A766D; margin: 0; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="sidebar">
+        <h2> ✿ Admin</h2>
+        <ul>
+            <li><a href="admin.html" class="active"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Inicio</a></li>
+            <li><a href="admin_productos.html"><i class="fa-solid fa-box" style="margin-right: 8px;"></i> Inventario</a></li>
+            <li><a href="admin_pedidos.html"><i class="fa-solid fa-truck-ramp-box" style="margin-right: 8px;"></i> Logística Órdenes</a></li>
+            <li><a href="admin_usuarios.html"><i class="fa-solid fa-users" style="margin-right: 8px;"></i> Usuarios</a></li> <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+            <li><a href="index.html"><i class="fa-solid fa-globe" style="margin-right: 8px;"></i> Ver Sitio Web</a></li>
+            <li><a onclick="cerrarSesion()"><i class="fa-solid fa-door-open" style="margin-right: 8px;"></i> Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header-admin">
+            <div>
+                <h1 id="saludo-admin">¡Hola, Administrador!</h1>
+                <p id="bienvenida-admin">Cargando credenciales...</p>
+            </div>
+        </div>
+
+        <div class="dashboard-cards">
+            <a href="admin_productos.html" class="card">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <h3>Gestionar Inventario</h3>
+                <p>Agrega, edita o elimina productos de la tienda MomMiel.</p>
+            </a>
+
+            <a href="admin_pedidos.html" class="card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Logística y Envíos</h3>
+                <p>Monitorea compras globales, actualiza rutas y estados de entrega.</p>
+            </a>
+
+            <a href="admin_usuarios.html" class="card"> <i class="fa-solid fa-users-gear"></i>
+                <h3>Control de Usuarios</h3>
+                <p>Visualiza el padrón de clientes, correos registrados y roles asignados.</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+const token = localStorage.getItem('token_mommiel');
+const rol = localStorage.getItem('user_role') || localStorage.getItem('user_rol');
+const nombreAdmin = localStorage.getItem('user_nombre');
+
+if (!token || rol !== 'administrador') {
+    alert(' Acceso denegado. Esta zona requiere rol de Administrador.');
+    window.location.href = 'login.html';
+} else {
+    document.getElementById('saludo-admin').innerText = `¡Hola, ${nombreAdmin}! `;
+    document.getElementById('bienvenida-admin').innerText = `Bienvenido al centro de control logístico de MomMiel ✿`;
+}
+
+function cerrarSesion() {
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+</script>
+</body>
+</html>

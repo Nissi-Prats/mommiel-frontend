@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventario | MomMiel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{background:#FFF9F5; font-family: 'Poppins', sans-serif; margin: 0;}
+.admin-container{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+.sidebar{background:#C8A98D;padding:30px;color:white;}
+.sidebar h2{font-family:'Fredoka',sans-serif;margin-bottom:40px;font-size:32px; margin-top: 0;}
+.sidebar ul{list-style:none; padding: 0;}
+.sidebar li{margin-bottom:15px;}
+.sidebar a{color:white;text-decoration:none;display:block;padding:12px;border-radius:10px;transition:.3s;cursor:pointer;}
+.sidebar a:hover, .sidebar a.active{background:rgba(255,255,255,.2); font-weight: 500;}
+.main{padding:40px;}
+.header-admin{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.header-admin h1 { margin: 0; font-family: 'Fredoka', sans-serif; color: #5D4B43; }
+.header-admin p { margin: 5px 0 0 0; color: #8A766D; }
+
+.tabla{background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.04);margin-bottom:30px;}
+.tabla h2{margin: 0; color:#5D4B43; font-family: 'Fredoka', sans-serif;}
+table{width:100%;border-collapse:collapse;text-align:left;margin-top:10px;}
+th,td{padding:15px;border-bottom:1px solid #eee; vertical-align: middle;}
+th{color:#8A766D;font-weight:500; text-transform: uppercase; font-size: 0.85rem;}
+.btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin-right:5px; font-family: 'Poppins', sans-serif; font-weight: 500; transition: 0.2s;}
+.btn.editar{background:#C8A98D;color:white;}
+.btn.editar:hover{background:#b5957a;}
+
+/* Estilos dinámicos para control lógico de catálogo */
+.btn.eliminar{background:#E8A7A1;color:white;}
+.btn.eliminar:hover{background:#d4928c;}
+.btn.activar{background:#A1E8B9;color:#1B5E20;}
+.btn.activar:hover{background:#8cd4a5;}
+
+.btn-nuevo{background:#5D4B43;color:white;padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:500; font-family: 'Poppins', sans-serif; transition: 0.2s;}
+.btn-nuevo:hover{background:#4a3b34;}
+
+/* Indicadores de estado visual */
+.status-indicator { display: inline-flex; align-items: center; font-size: 0.85rem; font-weight: 500; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.status-dot.active { background: #4CAF50; box-shadow: 0 0 8px #4CAF50; }
+.status-dot.inactive { background: #F44336; box-shadow: 0 0 8px #F44336; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transform: translateY(-20px); transition: transform 0.3s ease; }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-content h2 { font-family: 'Fredoka', sans-serif; color: #5D4B43; margin-top: 0; margin-bottom: 20px; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; color: #5D4B43; font-weight: 500; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.btn-cancelar { background: #eee; color: #666; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; }
+.btn-cancelar:hover { background: #ddd; }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="sidebar">
+        <h2>✿ Admin</h2>
+        <ul>
+            <li><a href="admin.html"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Inicio</a></li>
+            <li><a href="admin_productos.html" class="active"><i class="fa-solid fa-box" style="margin-right: 8px;"></i> Inventario</a></li>
+            <li><a href="admin_pedidos.html"><i class="fa-solid fa-truck-ramp-box" style="margin-right: 8px;"></i> Logística Órdenes</a></li>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+            <li><a href="index.html"><i class="fa-solid fa-globe" style="margin-right: 8px;"></i> Ver Sitio Web</a></li>
+            <li><a onclick="cerrarSesion()"><i class="fa-solid fa-door-open" style="margin-right: 8px;"></i> Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header-admin">
+            <div>
+                <h1>Gestión de Productos</h1>
+                <p id="bienvenida-admin">Administrador de Inventario </p>
+            </div>
+        </div>
+
+        <div class="tabla">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Catálogo Disponible</h2>
+                <button class="btn-nuevo" onclick="abrirModalFormulario()"><i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Agregar Producto</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">ID</th>
+                        <th style="width: 40%;">Producto</th>
+                        <th style="width: 15%;">Precio</th>
+                        <th style="width: 15%;">Estado</th>
+                        <th style="width: 20%; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-productos-admin">
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 30px;">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #C8A98D; margin-right: 8px;"></i> Cargando inventario...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalProducto">
+    <div class="modal-content">
+        <h2 id="modalTitle">Nuevo Producto</h2>
+        <form id="formProducto">
+            <input type="hidden" id="productoId">
+            <div class="form-group">
+                <label for="prodNombre">Nombre del Producto</label>
+                <input type="text" id="prodNombre" required placeholder="Ej. Miel de Abeja Orgánica 500g">
+            </div>
+            <div class="form-group">
+                <label for="prodPrecio">Precio ($)</label>
+                <input type="number" id="prodPrecio" step="0.01" required placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label for="prodDescripcion">Descripción</label>
+                <textarea id="prodDescripcion" placeholder="Describe los beneficios..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="prodImagen">Nombre de la Imagen / URL</label>
+                <input type="text" id="prodImagen" placeholder="Ej. miel_organica.png">
+            </div>
+            <div class="form-group">
+                <label for="prodCategoria">Categoría ID</label>
+                <input type="number" id="prodCategoria" value="1" required>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" onclick="cerrarModalFormulario()">Cancelar</button>
+                <button type="submit" class="btn-nuevo" style="padding: 10px 20px;" id="btnGuardarForm">Guardar Producto</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+const token = localStorage.getItem('token_mommiel');
+const rol = localStorage.getItem('user_role') || localStorage.getItem('user_rol');
+const nombreAdmin = localStorage.getItem('user_nombre');
+
+if (!token || rol !== 'administrador') {
+    window.location.href = 'login.html';
+} else {
+    document.getElementById('bienvenida-admin').innerText = `Catálogo activo controlado por: ${nombreAdmin} `;
+}
+
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+let cacheProductos = [];
+
+// 1. LEER LOS PRODUCTOS DESDE EL ENDPOINT DE ADMINISTRADOR (Muestra activos e inactivos)
+async function consultarInventario() {
+    const tbody = document.getElementById('tabla-productos-admin');
+    try {
+        //Cambiado a /productos-admin e incluyendo cabecera Authorization
+        const response = await fetch(`${API_URL}/productos-admin`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        const resultado = await response.json();
+        if (resultado.status === 'success') {
+            cacheProductos = resultado.data || [];
+            tbody.innerHTML = '';
+            if (cacheProductos.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #888;">No hay productos registrados.</td></tr>`;
+                return;
+            }
+            cacheProductos.forEach(p => {
+                // Checamos si está activo correctamente evaluando el entero 1
+                const esActivo = p.activo === 1;
+                const textoEstado = esActivo ? 'Visible' : 'Oculto';
+                const clasePunto = esActivo ? 'active' : 'inactive';
+                
+                // Botón dinámico según el estatus del producto
+                const botonAccion = esActivo 
+                    ? `<button class="btn eliminar" onclick="eliminarProducto(${p.id})"><i class="fa-solid fa-eye-slash"></i> Ocultar</button>`
+                    : `<button class="btn activar" onclick="reactivarProducto(${p.id})"><i class="fa-solid fa-eye"></i> Activar</button>`;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>#${p.id}</strong></td>
+                        <td><span style="color: #5D4B43; font-weight: 600; ${!esActivo ? 'text-decoration: line-through; color: #aaa;' : ''}">${p.nombre}</span></td>
+                        <td><strong style="color: #C8A98D;">$${parseFloat(p.precio).toFixed(2)}</strong></td>
+                        <td>
+                            <span class="status-indicator">
+                                <span class="status-dot ${clasePunto}"></span> ${textoEstado}
+                            </span>
+                        </td>
+                        <td style="text-align: center;">
+                            <button class="btn editar" onclick="prepararEdicion(${p.id})"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                            ${botonAccion}
+                        </td>
+                    </tr>`;
+            });
+        } else {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error: ${resultado.message}</td></tr>`;
+        }
+    } catch (error) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error de comunicación con Render.</td></tr>`;
+    }
+}
+
+// 2. OCULTAR PRODUCTO (HACE EL UPDATE EN GO A ACTIVO = 0)
+async function eliminarProducto(id) {
+    if (!confirm('⚠ ¿Deseas ocultar este producto del catálogo público?')) return;
+    
+    try {
+        const response = await fetch(`${API_URL}/productos/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        const data = await response.json();
+        if (response.ok && data.status === 'success') {
+            consultarInventario(); 
+        } else {
+            alert(`Error: ${data.message || 'No se pudo retirar el producto.'}`);
+        }
+    } catch (error) {
+        alert('Hubo un error de conexión al procesar la eliminación lógica.');
+    }
+}
+
+// 3. REACTIVAR PRODUCTO (EL ENDPOINT POST QUE SE ENCARGA DE HACER ACTIVO = 1)
+async function reactivarProducto(id) {
+    if (!confirm(' ¿Deseas volver a mostrar este producto en la tienda pública?')) return;
+    
+    try {
+        const response = await fetch(`${API_URL}/productos/${id}/activar`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        const data = await response.json();
+        if (response.ok && data.status === 'success') {
+            alert(' Producto reactivado en el catálogo público.');
+            consultarInventario(); 
+        } else {
+            alert(`Error: ${data.message || 'No se pudo reactivar el producto.'}`);
+        }
+    } catch (error) {
+        alert('Hubo un error de conexión al reactivar el producto.');
+    }
+}
+
+// 4. CONTROLADORES DEL MODAL
+function abrirModalFormulario() {
+    document.getElementById('formProducto').reset();
+    document.getElementById('productoId').value = '';
+    document.getElementById('modalTitle').innerText = 'Nuevo Producto ';
+    document.getElementById('btnGuardarForm').innerText = 'Guardar Producto';
+    document.getElementById('modalProducto').classList.add('active');
+}
+
+function cerrarModalFormulario() { document.getElementById('modalProducto').classList.remove('active'); }
+
+function prepararEdicion(id) {
+    const producto = cacheProductos.find(p => p.id === id);
+    if (!producto) return;
+    document.getElementById('productoId').value = producto.id;
+    document.getElementById('prodNombre').value = producto.nombre;
+    document.getElementById('prodPrecio').value = producto.precio;
+    document.getElementById('prodDescripcion').value = producto.descripcion || '';
+    document.getElementById('prodImagen').value = producto.imagen || '';
+    document.getElementById('prodCategoria').value = producto.id_categoria || 1;
+    document.getElementById('modalTitle').innerText = 'Editar Producto ✎';
+    document.getElementById('btnGuardarForm').innerText = 'Actualizar Cambios';
+    document.getElementById('modalProducto').classList.add('active');
+}
+
+// 5. GUARDAR O EDITAR
+document.getElementById('formProducto').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('productoId').value;
+    const nombre = document.getElementById('prodNombre').value.trim();
+    const precio = parseFloat(document.getElementById('prodPrecio').value);
+    const id_categoria = parseInt(document.getElementById('prodCategoria').value) || 1;
+    const datosProducto = { nombre, precio, descripcion: document.getElementById('prodDescripcion').value.trim(), imagen: document.getElementById('prodImagen').value.trim() || 'default.png', id_categoria };
+    
+    const esEdicion = id !== '';
+    const btn = document.getElementById('btnGuardarForm');
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(esEdicion ? `${API_URL}/productos/${id}` : `${API_URL}/productos`, {
+            method: esEdicion ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(datosProducto)
+        });
+        if (response.ok) { cerrarModalFormulario(); consultarInventario(); }
+    } catch (error) { alert('Fallo de conexión.'); }
+    finally { btn.disabled = false; }
+});
+
+function cerrarSesion() { localStorage.clear(); window.location.href = 'login.html'; }
+document.addEventListener('DOMContentLoaded', consultarInventario);
+</script>
+</body>
+</html>

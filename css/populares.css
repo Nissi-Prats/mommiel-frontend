@@ -1,0 +1,94 @@
+
+/* Contenedor principal de la cuadrícula de populares */
+#populares .productos-grid {
+    display: grid;
+    /* Ajuste para que las columnas sean automáticas pero tengan un ancho máximo */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); 
+    gap: 40px; /* Un poco más de espacio para que respiren */
+    margin-top: 40px;
+    
+    /* CENTRAR EL CONTENEDOR GIGANTE */
+    justify-content: center; /* Centra las tarjetas si hay pocas  */
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo de la sección para que no se pegue a los bordes */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilo de la tarjeta de producto individual */
+#populares .producto {
+    background: white;
+    padding: 25px; 
+    border-radius: 25px; /* Bordes  suaves */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* ancho de la tarjeta individual */
+    max-width: 350px;
+    width: 100%;
+}
+
+/* Efecto hover sutil */
+#populares .producto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Forzamos a que las imágenes se ajusten completas sin recortarse */
+#populares .producto img {
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: contain !important; /* Encaja la imagen completa */
+    background-color: #ffffff !important; 
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Ajustamos el espaciado de los títulos */
+#populares .producto h3 {
+    padding: 0 !important;
+    margin-bottom: 15px;
+    font-size: 19px !important;
+    color: #5D4B43;
+    font-weight: 600;
+    line-height: 1.4;
+    
+    /* Mantiene la simetría si un nombre es largo */
+    min-height: 54px; 
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+/* Ajustamos el precio */
+#populares .producto span {
+    padding: 0 !important;
+    margin-bottom: 20px;
+    font-size: 22px !important;
+    color: #C8A98D;
+    font-weight: 700;
+}
+
+/* Ajustamos el botón para que se vea como en tu catálogo */
+#populares .producto button {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 15px !important;
+    border: none;
+    background: #C8A98D !important;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+#populares .producto button:hover {
+    background: #B8977B !important; /* Un tono más oscuro al pasar el mouse */
+}

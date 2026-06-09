@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logística Órdenes | MomMiel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{background:#FFF9F5; font-family: 'Poppins', sans-serif; margin: 0;}
+.admin-container{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+.sidebar{background:#C8A98D;padding:30px;color:white;}
+.sidebar h2{font-family:'Fredoka',sans-serif;margin-bottom:40px;font-size:32px; margin-top: 0;}
+.sidebar ul{list-style:none; padding: 0;}
+.sidebar li{margin-bottom:15px;}
+.sidebar a{color:white;text-decoration:none;display:block;padding:12px;border-radius:10px;transition:.3s;cursor:pointer;}
+.sidebar a:hover, .sidebar a.active{background:rgba(255,255,255,.2); font-weight: 500;}
+.main{padding:40px;}
+.header-admin{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.header-admin h1 { margin: 0; font-family: 'Fredoka', sans-serif; color: #5D4B43; }
+.header-admin p { margin: 5px 0 0 0; color: #8A766D; }
+
+.tabla{background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.04);margin-bottom:30px;}
+.tabla h2{margin: 0; color:#5D4B43; font-family: 'Fredoka', sans-serif;}
+table{width:100%;border-collapse:collapse;text-align:left;margin-top:10px;}
+th,td{padding:15px;border-bottom:1px solid #eee; vertical-align: middle;}
+th{color:#8A766D;font-weight:500; text-transform: uppercase; font-size: 0.85rem;}
+
+.badge-estado { padding: 6px 12px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: inline-block;}
+.badge-procesado { background: #E3F2FD; color: #0D47A1; }
+.badge-camino { background: #FFF3E0; color: #E65100; }
+.badge-entregado { background: #E8F5E9; color: #1B5E20; }
+.badge-cancelado { background: #FFEBEE; color: #B71C1C; }
+
+.select-logistica { padding: 8px 12px; border-radius: 8px; border: 1px solid #C8A98D; font-family: 'Poppins', sans-serif; color: #5D4B43; background: white; cursor: pointer; font-weight: 500; outline: none; transition: 0.2s;}
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="sidebar">
+        <h2>✿ Admin</h2>
+        <ul>
+            <li><a href="admin.html"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Inicio</a></li>
+            <li><a href="admin_productos.html"><i class="fa-solid fa-box" style="margin-right: 8px;"></i> Inventario</a></li>
+            <li><a href="admin_pedidos.html" class="active"><i class="fa-solid fa-truck-ramp-box" style="margin-right: 8px;"></i> Logística Órdenes</a></li>
+            <li><a href="admin_usuarios.html"><i class="fa-solid fa-users" style="margin-right: 8px;"></i> Usuarios</a></li>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+            <li><a href="index.html"><i class="fa-solid fa-globe" style="margin-right: 8px;"></i> Ver Sitio Web</a></li>
+            <li><a onclick="cerrarSesion()"><i class="fa-solid fa-door-open" style="margin-right: 8px;"></i> Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header-admin">
+            <div>
+                <h1>Seguimiento Logístico</h1>
+                <p id="bienvenida-admin">Control de Envíos Globales</p>
+            </div>
+        </div>
+
+        <div class="tabla">
+            <h2>Pedidos Recibidos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">Orden</th>
+                        <th style="width: 22%;">Cliente / Teléfono</th>
+                        <th style="width: 27%;">Artículos Compuestos y Dirección</th>
+                        <th style="width: 12%;">Total Cobrado</th>
+                        <th style="width: 15%;">Último Cambio</th>
+                        <th style="width: 16%; text-align: center;">Estado Logístico</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pedidos-admin">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #C8A98D; margin-right: 8px;"></i> Consultando base de datos de envíos...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+const token = localStorage.getItem('token_mommiel');
+const rol = localStorage.getItem('user_role') || localStorage.getItem('user_rol');
+const nombreAdmin = localStorage.getItem('user_nombre');
+
+if (!token || rol !== 'administrador') {
+    window.location.href = 'login.html';
+} else {
+    document.getElementById('bienvenida-admin').innerText = `Monitoreo logístico activo por: ${nombreAdmin} ⛟`;
+}
+
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+async function consultarPedidosGlobales() {
+    const tbody = document.getElementById('tabla-pedidos-admin');
+    try {
+        const response = await fetch(`${API_URL}/admin/pedidos/global`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const resultado = await response.json();
+
+        if (resultado.status === 'success') {
+            const pedidos = resultado.data || [];
+            tbody.innerHTML = '';
+
+            if (pedidos.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #888; padding:20px;">No hay compras ni pedidos registrados.</td></tr>`;
+                return;
+            }
+
+            pedidos.forEach(p => {
+                let detalleHtml = '<ul style="margin:0; padding-left:15px; font-size:0.9rem; color:#666; margin-top:5px;">';
+                if(p.detalles && p.detalles.length > 0) {
+                    p.detalles.forEach(d => {
+                        detalleHtml += `<li>${d.cantidad}x ${d.nombre_producto} (<small>$${parseFloat(d.precio_unitario).toFixed(2)}</small>)</li>`;
+                    });
+                } else {
+                    detalleHtml += '<li>Sin artículos registrados</li>';
+                }
+                detalleHtml += '</ul>';
+
+                const fechaModificada = new Date(p.ultima_actualizacion).toLocaleString('es-MX', {timeZone: 'America/Mexico_City'});
+
+                let claseBadge = 'badge-procesado';
+                if(p.estado === 'en camino') claseBadge = 'badge-camino';
+                if(p.estado === 'entregado') claseBadge = 'badge-entregado';
+                if(p.estado === 'cancelado') claseBadge = 'badge-cancelado';
+
+                
+                // Si p.nombre_usuario contiene el string genérico "Usuario #X", se imprime directo.
+                // Si contiene el nombre real, se concatena el nombre y su ID al lado: "Sarahi (#10)"
+                const nombreCliente = p.nombre_usuario.includes("Usuario #") 
+                    ? p.nombre_usuario 
+                    : `${p.nombre_usuario} <small style="color:#8A766D; font-weight:400;">(#${p.id_usuario})</small>`;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>#${p.id}</strong></td>
+                        <td>
+                            <div style="font-weight:600; color:#5D4B43; font-size:0.95rem;">
+                                <i class="fa-solid fa-user" style="color:#C8A98D; font-size:0.85rem; margin-right:4px;"></i> ${nombreCliente}
+                            </div>
+                            <div style="font-size:0.8rem; color:#8A766D; margin-top:2px;">
+                                <i class="fa-solid fa-phone"></i> ${p.telefono}
+                            </div>
+                        </td>
+                        <td>
+                            <div style="font-size:0.85rem; font-weight:500;"><i class="fa-solid fa-location-dot" style="color:#C8A98D;"></i> ${p.direccion}, ${p.ciudad}, ${p.estado_republica}, CP ${p.codigo_postal}</div>
+                            ${detalleHtml}
+                        </td>
+                        <td><strong style="color:#5D4B43;">$${parseFloat(p.total).toFixed(2)}</strong></td>
+                        <td style="font-size:0.8rem; color:#666;">${fechaModificada}</td>
+                        <td style="text-align: center;">
+                            <select class="select-logistica ${claseBadge}" onchange="actualizarEstadoOrden(${p.id}, this.value)">
+                                <option value="procesado" ${p.estado === 'procesado' ? 'selected':''}>Procesado</option>
+                                <option value="en camino" ${p.estado === 'en camino' ? 'selected':''}>En Camino</option>
+                                <option value="entregado" ${p.estado === 'entregado' ? 'selected':''}>Entregado</option>
+                                <option value="cancelado" ${p.estado === 'cancelado' ? 'selected':''}>Cancelado</option>
+                            </select>
+                        </td>
+                    </tr>`;
+            });
+        }
+    } catch (error) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Error al consultar la pasarela de pedidos.</td></tr>`;
+    }
+}
+
+async function actualizarEstadoOrden(idPedido, nuevoEstado) {
+    try {
+        const response = await fetch(`${API_URL}/admin/pedidos/estado/${idPedido}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ estado: nuevoEstado })
+        });
+        const data = await response.json();
+        if (response.ok && data.status === 'success') {
+            consultarPedidosGlobales(); 
+        } else {
+            alert(`Error: ${data.message || 'No se pudo actualizar el paquete.'}`);
+        }
+    } catch (error) {
+        alert("Fallo de conexión al enviar actualización.");
+    }
+}
+
+function cerrarSesion() { localStorage.clear(); window.location.href = 'login.html'; }
+document.addEventListener('DOMContentLoaded', consultarPedidosGlobales);
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto | MomMiel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body class="checkout-body-detalle">
+
+<main class="contenedor-detalle">
+    
+    <div class="lado-imagen-detalle">
+        <img id="detalle-imagen" src="" alt="Cargando producto...">
+    </div>
+
+    <div class="lado-informacion-detalle">
+        <h1 id="detalle-nombre">Cargando...</h1>
+        <div class="precio" id="detalle-precio">$0.00</div>
+        <p class="descripcion" id="detalle-descripcion">Por favor, espera un momento mientras traemos los detalles del producto.</p>
+        
+        <button class="btn-agregar-carrito" id="btn-comprar-detalle">Agregar al Carrito ✿</button>
+        
+        <a href="catalogo.html" class="enlace-regresar-detalle">← Volver al Catálogo</a>
+    </div>
+
+</main>
+
+<script>
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+let productoActual = null;
+
+async function cargarDetalleProducto() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productoId = urlParams.get('id');
+
+    if (!productoId) {
+        window.location.href = 'catalogo.html';
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/productos/${productoId}`);
+        const resultado = await response.json();
+
+        if (resultado.status === 'success') {
+            productoActual = resultado.data;
+
+            // Inyectamos los textos dinámicos desde la API
+            document.getElementById('detalle-nombre').innerText = productoActual.nombre;
+            document.getElementById('detalle-precio').innerText = `$${parseFloat(productoActual.precio).toFixed(2)}`;
+            document.getElementById('detalle-descripcion').innerText = productoActual.descripcion || 'Sin descripción disponible.';
+            
+            //CATEGORÍAS ENLAZADAS DESDE BACKEND
+            let rutaImagenLocal = "";
+            
+            // Evaluamos el id_categoria real que ya nos regresa la API de Go tanto para populares como para catálogo general
+            if (productoActual.id_categoria === 1) {
+                rutaImagenLocal = `img/categoria1/${productoActual.imagen}`;
+            } else if (productoActual.id_categoria === 2) {
+                rutaImagenLocal = `img/categoria2/${productoActual.imagen}`;
+            } else if (productoActual.id_categoria === 3) {
+                rutaImagenLocal = `img/categoria3/${productoActual.imagen}`;
+            } else {
+                rutaImagenLocal = `img/${productoActual.imagen}`;
+            }
+
+            // Asignamos la ruta calculada al elemento de imagen
+            const imgEl = document.getElementById('detalle-imagen');
+            imgEl.src = rutaImagenLocal;
+            imgEl.alt = productoActual.nombre;
+            
+            // Manejo de errores por si hay diferencias de extensiones 
+            imgEl.onerror = function() {
+                this.src = 'img/flor.jpeg';
+                console.warn(`No se pudo cargar la imagen local en: "${rutaImagenLocal}". Verifica si guardaste el archivo físico en la carpeta correcta.`);
+            };
+        } else {
+            alert('Producto no encontrado.');
+            window.location.href = 'catalogo.html';
+        }
+    } catch (error) {
+        console.error('Error al conectar con la API:', error);
+    }
+}
+
+// Guardado unificado en LocalStorage para el carrito de compras
+document.getElementById('btn-comprar-detalle').addEventListener('click', () => {
+    if (!productoActual) return;
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const existe = carrito.find(item => item.id === productoActual.id);
+
+    if (existe) {
+        existe.cantidad += 1;
+    } else {
+        carrito.push({
+            id: productoActual.id,
+            nombre: productoActual.nombre,
+            precio: parseFloat(productoActual.precio),
+            cantidad: 1
+        });
+    }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    
+    //Siempre redirige al carrito primero
+    if (confirm(`✿ ¡${productoActual.nombre} agregado! ¿Quieres ir al carrito para revisar tu pedido?`)) {
+        window.location.href = 'carrito.html'; 
+    }
+});
+
+document.addEventListener('DOMContentLoaded', cargarDetalleProducto);
+</script>
+</body>
+</html>

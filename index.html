@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MomMiel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/populares.css">
+</head>
+<body>
+
+<header id="inicio">
+    <nav class="navbar">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="nav-links" id="menu-navegacion">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#etapas">Etapas</a></li>
+            <li><a href="catalogo.html">Productos</a></li>
+            <li><a href="#testimonios">Opiniones</a></li>
+            <li id="nav-ingresar"><a href="login.html">Ingresar</a></li>
+            <li id="nav-carrito" style="display: none;">
+            <a href="carrito.html" style="font-weight: 500;">Mi Carrito </a>
+        </li>
+            <li id="nav-usuario" style="display: none;"><a href="#" style="font-weight: 600; color: #C8A98D;" id="nombre-perfil">Hola</a></li>
+            <li id="nav-logout" style="display: none;"><a href="#" onclick="ejecutarCerrarSesion()">Cerrar Sesión</a></li>
+        </ul>
+        <div class="menu-btn">☰</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <span class="badge">Tu guía en la aventura de ser mamá</span>
+            <h1>Todo lo que necesitas para disfrutar tu embarazo con tranquilidad</h1>
+            <p>Consejos, artículos especializados y productos seleccionados para acompañarte durante cada etapa de la maternidad.</p>
+            <div class="hero-buttons">
+                <a href="registro.html" class="btn btn-primary" id="btn-hero-accion">Crear Cuenta</a>
+                <a href="catalogo.html" class="btn btn-primary">Explorar Productos</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://http2.mlstatic.com/D_NQ_NP_787999-MLM93334927061_092025-O.webp" alt="Mamá embarazada">
+        </div>
+    </section>
+</header>
+
+<section class="features">
+    <div class="container">
+        <h2>¿Qué encontrarás en MomMiel?</h2>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">✐</div>
+                <h3>Información Confiable</h3>
+                <p>Consejos, guías y artículos organizados por etapas del embarazo.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">-`♡´-</div>
+                <h3>Tienda Especializada</h3>
+                <p>Productos seleccionados para mamá y bebé.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">𓂃✍︎</div>
+                <h3>Seguimiento</h3>
+                <p>Contenido adaptado a cada etapa del desarrollo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="etapas" class="etapas">
+    <div class="container">
+        <h2>Etapas del Embarazo</h2>
+
+        <div class="etapas-grid">
+            <div class="etapa-card">
+                <h3>Primer Trimestre</h3>
+                <p>Descubre los primeros cambios y cuidados importantes.</p>
+            </div>
+
+            <div class="etapa-card">
+                <h3>Segundo Trimestre</h3>
+                <p>Conoce el desarrollo de tu bebé y consejos de bienestar.</p>
+            </div>
+
+            <div class="etapa-card">
+                <h3>Tercer Trimestre</h3>
+                <p>Prepárate para la llegada de tu bebé.</p>
+            </div>
+
+            <div class="etapa-card">
+                <h3>Recién Nacido</h3>
+                <p>Consejos sobre sueño, alimentación y cuidados.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="populares" class="productos" style="background: #FFF9F5; padding: 60px 0;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 40px; color: #5D4B43; font-family: 'Fredoka', sans-serif; font-size: 36px;">˗ˋˏ$ˎˊ˗ Los Más Vendidos de MomMiel</h2>
+        <div class="productos-grid" id="contenedor-populares">
+            <p style="text-align: center; color: #8A766D; grid-column: 1/-1;">Cargando los favoritos de las mamás...</p>
+        </div>
+    </div>
+</section>
+
+<section id="testimonios" class="testimonios">
+    <div class="container">
+        <h2>Lo que dicen nuestras mamás</h2>
+
+        <div class="testimonios-grid">
+            <div class="testimonio">
+                <p>"Encontré información muy útil durante todo mi embarazo."</p>
+                <h4>- Andrea</h4>
+            </div>
+
+            <div class="testimonio">
+                <p>"Los productos son excelentes y la página es muy fácil de usar."</p>
+                <h4>- Fernanda</h4>
+            </div>
+
+            <div class="testimonio">
+                <p>"Una plataforma hermosa y muy completa."</p>
+                <h4>- Mariana</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Acompañándote durante la maravillosa aventura de ser mamá.</p>
+        </div>
+
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>León, Guanajuato</p>
+        </div>
+    </div>
+
+    <div class="copyright">© 2026 MomMiel</div>
+</footer>
+
+<script>
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. CONTROL DE SESIÓN
+    const token = localStorage.getItem('token_mommiel');
+    const nombre = localStorage.getItem('user_nombre');
+    const rol = localStorage.getItem('user_rol');
+
+    const liIngresar = document.getElementById('nav-ingresar');
+    const liUsuario = document.getElementById('nav-usuario');
+    const liLogout = document.getElementById('nav-logout');
+    const txtPerfil = document.getElementById('nombre-perfil');
+    const btnHero = document.getElementById('btn-hero-accion');
+    
+    // Capturamos el nuevo elemento de la lista para el carrito
+    const liCarrito = document.getElementById('nav-carrito');
+
+    if (token && nombre) {
+        if (liIngresar) liIngresar.style.display = 'none'; 
+        
+        if (liUsuario && txtPerfil) {
+            liUsuario.style.display = 'block';
+            if (rol === 'administrador') {
+                txtPerfil.innerText = `✞ ${nombre} (Admin)`;
+                txtPerfil.href = 'admin.html';
+                
+                //  Si es administrador, ocultamos el carrito para no saturar su barra
+                if (liCarrito) liCarrito.style.display = 'none';
+            } else {
+                txtPerfil.innerText = `✿ Hola, ${nombre}`;
+                txtPerfil.href = 'perfil.html'; 
+                txtPerfil.style.cursor = 'pointer';
+                
+                //  Si es usuario normal, mostramos el módulo del carrito con orgullo
+                if (liCarrito) liCarrito.style.display = 'block';
+            }
+        }
+        if (liLogout) liLogout.style.display = 'block'; 
+
+        if (btnHero) {
+            btnHero.innerText = "Ir al Blog";
+            btnHero.href = "blog.html"; 
+        }
+    } else {
+        //  Si no hay token, garantizamos que el carrito no se muestre bajo ninguna circunstancia
+        if (liCarrito) liCarrito.style.display = 'none';
+    }
+
+    // 2. DISPARAR LA CARGA DE PRODUCTOS POPULARES
+    cargarProductosPopulares();
+});
+
+async function cargarProductosPopulares() {
+    const contenedorPopulares = document.getElementById('contenedor-populares');
+    if (!contenedorPopulares) return;
+
+    try {
+        const response = await fetch(`${API_URL}/productos/populares`);
+        if (!response.ok) throw new Error(`Error en el servidor: ${response.status}`);
+
+        const resultado = await response.json();
+        const listaPopulares = resultado.data || [];
+
+        contenedorPopulares.innerHTML = '';
+
+        if (listaPopulares.length === 0) {
+            contenedorPopulares.innerHTML = '<p style="text-align: center; color: #8A766D; grid-column: 1/-1;">Próximamente verás los favoritos aquí.</p>';
+            return;
+        }
+
+        listaPopulares.forEach(p => {
+            let rutaImagenLocal = "";
+
+            if (p.nombre_categoria === "Para la Futura Mamá") {
+                rutaImagenLocal = `img/categoria1/${p.imagen}`;
+            } else if (p.nombre_categoria === "Alimentación y Lactancia") {
+                rutaImagenLocal = `img/categoria2/${p.imagen}`;
+            } else if (p.nombre_categoria === "Descanso e Higiene del Bebé") {
+                rutaImagenLocal = `img/categoria3/${p.imagen}`;
+            } else {
+                rutaImagenLocal = `img/${p.imagen}`;
+            }
+
+            contenedorPopulares.innerHTML += `
+                <div class="producto">
+                    <img src="${rutaImagenLocal}" alt="${p.nombre}" onerror="this.src='img/flor.jpeg'">
+                    <h3>${p.nombre}</h3>
+                    <span>$${parseFloat(p.precio).toFixed(2)}</span>
+                    <button onclick="window.location.href='producto.html?id=${p.id}'">Ver Producto</button>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error al pintar populares:", error);
+        if (contenedorPopulares) {
+            contenedorPopulares.innerHTML = `<p style="text-align: center; color: red; grid-column: 1/-1;">Error temporal al conectar con la tienda.</p>`;
+        }
+    }
+}
+
+function ejecutarCerrarSesion() {
+    localStorage.removeItem('token_mommiel');
+    localStorage.removeItem('user_rol');
+    localStorage.removeItem('user_nombre');
+    alert('Sesión cerrada en MomMiel. ¡Vuelve pronto!');
+    window.location.reload(); 
+}
+</script>
+</body>
+</html>

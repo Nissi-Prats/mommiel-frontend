@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | MomMiel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="contenedor">
+
+    <div class="lado-imagen">
+        <h1>✿ MomMiel</h1>
+        <p>Bienvenida nuevamente. Continúa tu aventura de maternidad con nosotros.</p>
+        <img src="https://hilerozornotzan.eus/wp-content/uploads/2018/05/D3B2286E-A922-417E-AFEA-59D05E455489.png" alt="MomMiel Ilustración">
+    </div>
+
+    <div class="lado-formulario">
+        <form class="formulario" id="loginForm">
+
+            <h2>Iniciar Sesión</h2>
+
+            <div class="input-group">
+                <label for="loginCorreo">Correo Electrónico</label>
+                <input type="email" id="loginCorreo" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" placeholder="********" required>
+            </div>
+
+            <button type="submit" class="btn-auth">Ingresar</button>
+
+            <div class="cambio-auth">
+                ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evitamos que la página se recargue e interrumpa la petición
+
+    const correo = document.getElementById('loginCorreo').value;
+    const contrasena = document.getElementById('loginPassword').value;
+
+    try {
+        // Enviamos las credenciales reales a tu API en Render
+        const response = await fetch(`${API_URL}/usuarios/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo, contrasena })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status === "success") {
+            // Guardamos de forma persistente los datos de la sesión en el navegador (Rúbrica: Manejo de Sesiones)
+            localStorage.setItem('token_mommiel', data.token);
+            localStorage.setItem('user_rol', data.user.rol);
+            localStorage.setItem('user_nombre', data.user.nombre);
+
+            alert(`¡Bienvenida de vuelta, ${data.user.nombre}! ✿`);
+
+            // Redirección inteligente basada en el rol de la Base de Datos
+            if (data.user.rol === 'administrador') {
+                window.location.href = 'admin.html';
+            } else {
+                //  CONTROL DE FLUJO DE COMPRA: Comprobamos si venía de querer pagar
+                const destinoPendiente = localStorage.getItem('destino_post_login');
+                
+                if (destinoPendiente) {
+                    // Si hay una ruta guardada (checkout.html), la usamos y la limpiamos
+                    localStorage.removeItem('destino_post_login');
+                    window.location.href = destinoPendiente;
+                } else {
+                    // Si inició sesión de forma normal, va directo al Home index
+                    window.location.href = 'index.html'; 
+                }
+            }
+        } else {
+            // Manejo de errores controlados desde el backend en Go
+            alert('Error: ' + (data.message || 'Usuario o contraseña incorrectos.'));
+        }
+    } catch (error) {
+        console.error('Error de red:', error);
+        alert('No se pudo conectar con el servidor de Render. Asegúrate de que el backend esté encendido.');
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro | MomMiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="contenedor">
+
+<div class="lado-imagen">
+<h1>✿ MomMiel</h1>
+<p>Comienza una experiencia creada especialmente para futuras mamás.</p>
+<img src="https://hilerozornotzan.eus/wp-content/uploads/2018/05/D3B2286E-A922-417E-AFEA-59D05E455489.png">
+</div>
+
+<div class="lado-formulario">
+
+<form class="formulario" id="registroForm">
+<h2>Crear Cuenta</h2>
+
+<div class="input-group">
+<label>Nombre Completo</label>
+<input type="text" id="nombre" required>
+</div>
+
+<div class="input-group">
+<label>Correo Electrónico</label>
+<input type="email" id="correo" required>
+</div>
+
+<div class="input-group">
+<label>Contraseña</label>
+<input type="password" id="password1" required>
+</div>
+
+<button type="submit" class="btn-auth">Registrarse</button>
+
+<div class="cambio-auth">
+¿Ya tienes cuenta? <a href="login.html">Inicia Sesión</a>
+</div>
+</form>
+
+</div>
+</div>
+
+<script>
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+document.getElementById('registroForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const contrasena = document.getElementById('password1').value;
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios/registrar`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, correo, contrasena })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(' ¡Tu cuenta en MomMiel ha sido creada con éxito! Redirigiendo al login...');
+            window.location.href = 'login.html';
+        } else {
+            alert('Error al registrar: ' + (data.message || 'Datos inválidos o correo ya registrado.'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un problema de conexión con el servidor.');
+    }
+});
+</script>
+</body>
+</html>

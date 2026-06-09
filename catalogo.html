@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda | MomMiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+
+.catalogo-header {
+    padding: 140px 8% 60px;
+    background: linear-gradient(135deg, #F8E5E5, #FFF9F5, #F2E7DC);
+    text-align: center;
+}
+.catalogo-header h1 {
+    font-size: 48px;
+    color: #5D4B43;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 15px;
+}
+.catalogo-header p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+    font-size: 16px;
+    color: #8A766D;
+}
+</style>
+</head>
+<body>
+
+<header id="inicio">
+<nav class="navbar">
+<div class="logo">✿ MomMiel</div>
+<ul class="nav-links" id="menu-navegacion">
+<li><a href="index.html#inicio">Inicio</a></li>
+<li><a href="index.html#etapas">Etapas</a></li>
+<li><a href="catalogo.html" style="font-weight: 600; color: #C8A98D;">Productos</a></li>
+<li><a href="index.html#testimonios">Opiniones</a></li>
+<li id="nav-ingresar"><a href="login.html">Ingresar</a></li>
+<li id="nav-usuario" style="display: none;"><a href="#" style="font-weight: 600; color: #C8A98D;" id="nombre-perfil">Hola</a></li>
+<li id="nav-logout" style="display: none;"><a href="#" onclick="ejecutarCerrarSesion()">Cerrar Sesión </a></li>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</ul>
+<div class="menu-btn">☰</div>
+</nav>
+
+<section class="catalogo-header">
+<h1>Nuestra Tienda Especializada</h1>
+<p>Productos seleccionados con amor para brindarte el máximo confort y seguridad a ti y a tu bebé en cada momento.</p>
+</section>
+</header>
+
+<section id="productos" class="productos" style="background: #FFF9F5; padding: 40px 0;">
+<div class="container">
+
+    <h3 style="color: #C8A98D; font-family: 'Fredoka', sans-serif; margin: 30px 0 20px; font-size: 24px; border-bottom: 2px solid #F2E7DC; padding-bottom: 5px;">
+        <i class="fa-solid fa-person-pregnant" style="margin-right: 10px;"></i> Para la Futura Mamá 
+        <span style="font-size: 14px; color: #8A766D; font-weight: 300;">(1er / 2do / 3er Trimestre)</span>
+    </h3>
+    <div class="productos-grid" id="catalogo-categoria-1">
+        <p style="text-align: center; color: #8A766D; grid-column: 1/-1;">Cargando productos de mamá...</p>
+    </div>
+
+    <h3 style="color: #C8A98D; font-family: 'Fredoka', sans-serif; margin: 50px 0 20px; font-size: 24px; border-bottom: 2px solid #F2E7DC; padding-bottom: 5px;">
+        <i class="fa-solid fa-bottle-droplet" style="margin-right: 10px;"></i> Alimentación y Lactancia 
+        <span style="font-size: 14px; color: #8A766D; font-weight: 300;">(Recién Nacido)</span>
+    </h3>
+    <div class="productos-grid" id="catalogo-categoria-2">
+        <p style="text-align: center; color: #8A766D; grid-column: 1/-1;">Cargando productos de lactancia...</p>
+    </div>
+
+    <h3 style="color: #C8A98D; font-family: 'Fredoka', sans-serif; margin: 50px 0 20px; font-size: 24px; border-bottom: 2px solid #F2E7DC; padding-bottom: 5px;">
+        <i class="fa-solid fa-bath" style="margin-right: 10px;"></i> Descanso e Higiene del Bebé 
+        <span style="font-size: 14px; color: #8A766D; font-weight: 300;">(Cuidados Generales)</span>
+    </h3>
+    <div class="productos-grid" id="catalogo-categoria-3">
+        <p style="text-align: center; color: #8A766D; grid-column: 1/-1;">Cargando productos de higiene...</p>
+    </div>
+
+</div>
+</section>
+
+<footer>
+<div class="container footer-grid">
+<div>
+<h3>✿ MomMiel</h3>
+<p>Acompañándote durante la maravillosa aventura de ser mamá.</p>
+</div>
+
+<div>
+<h4>Enlaces</h4>
+<ul>
+<li><a href="index.html" style="color: inherit; text-decoration: none;">Inicio</a></li>
+<li><a href="blog.html" style="color: inherit; text-decoration: none;">Blog</a></li>
+<li><a href="catalogo.html" style="color: inherit; text-decoration: none;">Tienda</a></li>
+</ul>
+</div>
+
+<div>
+<h4>Contacto</h4>
+<p>contacto@mommiel.com</p>
+<p>León, Guanajuato</p>
+</div>
+</div>
+
+<div class="copyright">© 2026 MomMiel</div>
+</footer>
+
+<script>
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. CONTROL DE SESIÓN EN NAVBAR
+    const token = localStorage.getItem('token_mommiel');
+    const nombre = localStorage.getItem('user_nombre');
+    const rol = localStorage.getItem('user_rol');
+
+    const liIngresar = document.getElementById('nav-ingresar');
+    const liUsuario = document.getElementById('nav-usuario');
+    const liLogout = document.getElementById('nav-logout');
+    const txtPerfil = document.getElementById('nombre-perfil');
+
+    if (token && nombre) {
+        if (liIngresar) liIngresar.style.display = 'none'; 
+        
+        if (liUsuario && txtPerfil) {
+            liUsuario.style.display = 'block';
+            if (rol === 'administrador') {
+                txtPerfil.innerText = ` ${nombre} (Admin)`;
+                txtPerfil.href = 'admin.html';
+            } else {
+                txtPerfil.innerText = ` Hola, ${nombre}`;
+                txtPerfil.removeAttribute('href'); 
+            }
+        }
+        if (liLogout) liLogout.style.display = 'block'; 
+    }
+
+    // 2. DISPARAR LA CARGA DE LA TIENDA 
+    cargarTiendaPorEtapas();
+});
+
+async function cargarTiendaPorEtapas() {
+    const cat1 = document.getElementById('catalogo-categoria-1');
+    const cat2 = document.getElementById('catalogo-categoria-2');
+    const cat3 = document.getElementById('catalogo-categoria-3');
+
+    try {
+        const response = await fetch(`${API_URL}/productos`);
+        if (!response.ok) throw new Error(`Error en el servidor: ${response.status}`);
+
+        const resultado = await response.json();
+        const listaProductos = resultado.data || [];
+
+        if (listaProductos.length === 0) {
+            const vacioMsg = `<p style="text-align: center; color: #8A766D; grid-column: 1/-1;">No hay artículos registrados actualmente.</p>`;
+            if(cat1) cat1.innerHTML = vacioMsg;
+            return;
+        }
+
+        // Limpiamos los mensajes predeterminados de carga
+        if(cat1) cat1.innerHTML = '';
+        if(cat2) cat2.innerHTML = '';
+        if(cat3) cat3.innerHTML = '';
+
+        let totalCat1 = 0;
+        let totalCat2 = 0;
+        let totalCat3 = 0;
+
+listaProductos.forEach(p => {
+    let rutaImagenLocal = "";
+    let perteneceACategoria = 0;
+
+    // usando el id_categoria numérico de  INSERTS
+    if (p.id_categoria === 1) {
+        rutaImagenLocal = `img/categoria1/${p.imagen}`;
+        perteneceACategoria = 1;
+    } else if (p.id_categoria === 2) {
+        rutaImagenLocal = `img/categoria2/${p.imagen}`;
+        perteneceACategoria = 2;
+    } else if (p.id_categoria === 3) {
+        rutaImagenLocal = `img/categoria3/${p.imagen}`;
+        perteneceACategoria = 3;
+    } else {
+        // Respaldo por si algún producto tiene categoría 0 o nula
+        rutaImagenLocal = `img/${p.imagen}`;
+    }
+
+    // Estructura visual de tarjeta con el diseño nativo de MomMiel
+    const tarjetaHTML = `
+        <div class="producto">
+            <img src="${rutaImagenLocal}" alt="${p.nombre}" onerror="this.src='img/flor.jpeg'">
+            <h3>${p.nombre}</h3>
+            <span>$${parseFloat(p.precio).toFixed(2)}</span>
+            <button onclick="window.location.href='producto.html?id=${p.id}'">Ver Producto</button>
+        </div>
+    `;
+
+    // Inyección limpia en el contenedor correspondiente
+    if (perteneceACategoria === 1 && cat1) {
+        cat1.innerHTML += tarjetaHTML;
+        totalCat1++;
+    } else if (perteneceACategoria === 2 && cat2) {
+        cat2.innerHTML += tarjetaHTML;
+        totalCat2++;
+    } else if (perteneceACategoria === 3 && cat3) {
+        cat3.innerHTML += tarjetaHTML;
+        totalCat3++;
+    }
+});
+
+        // Mensajes de validación por si alguna sección queda en blanco
+        const msgVacio = '<p style="grid-column: 1/-1; text-align: center; color: #8A766D;">No hay productos disponibles por el momento.</p>';
+        if (totalCat1 === 0 && cat1) cat1.innerHTML = msgVacio;
+        if (totalCat2 === 0 && cat2) cat2.innerHTML = msgVacio;
+        if (totalCat3 === 0 && cat3) cat3.innerHTML = msgVacio;
+
+    } catch (error) {
+        console.error("Error en catálogo:", error);
+        if(cat1) cat1.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: red;">Error al conectar con Render.</p>`;
+    }
+}
+
+// Función de cierre de sesión
+function ejecutarCerrarSesion() {
+    localStorage.removeItem('token_mommiel');
+    localStorage.removeItem('user_rol');
+    localStorage.removeItem('user_nombre');
+    alert(' Sesión cerrada en MomMiel. ¡Vuelve pronto!');
+    window.location.href = 'index.html'; 
+}
+</script>
+</body>
+</html>

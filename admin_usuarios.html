@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Usuarios | MomMiel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{background:#FFF9F5; font-family: 'Poppins', sans-serif; margin: 0;}
+.admin-container{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+.sidebar{background:#C8A98D;padding:30px;color:white;}
+.sidebar h2{font-family:'Fredoka',sans-serif;margin-bottom:40px;font-size:32px; margin-top: 0;}
+.sidebar ul{list-style:none; padding: 0;}
+.sidebar li{margin-bottom:15px;}
+.sidebar a{color:white;text-decoration:none;display:block;padding:12px;border-radius:10px;transition:.3s;cursor:pointer;}
+.sidebar a:hover, .sidebar a.active{background:rgba(255,255,255,.2); font-weight: 500;}
+.main{padding:40px;}
+.header-admin{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+.header-admin h1 { margin: 0; font-family: 'Fredoka', sans-serif; color: #5D4B43; }
+.header-admin p { margin: 5px 0 0 0; color: #8A766D; }
+
+.tabla{background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.04);margin-bottom:30px;}
+.tabla h2{margin: 0; color:#5D4B43; font-family: 'Fredoka', sans-serif;}
+table{width:100%;border-collapse:collapse;text-align:left;margin-top:10px;}
+th,td{padding:15px;border-bottom:1px solid #eee; vertical-align: middle;}
+th{color:#8A766D;font-weight:500; text-transform: uppercase; font-size: 0.85rem;}
+
+.btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin-right:5px; font-family: 'Poppins', sans-serif; font-weight: 500; transition: 0.2s;}
+.btn.suspender { background:#E8A7A1; color:white; }
+.btn.suspender:hover { background:#d4928c; }
+.btn.activar { background:#A1E8B9; color:#1B5E20; }
+.btn.activar:hover { background:#8cd4a5; }
+.btn-nuevo{background:#5D4B43;color:white;padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:500; font-family: 'Poppins', sans-serif; transition: 0.2s;}
+.btn-nuevo:hover{background:#4a3b34;}
+
+.badge-rol { padding: 4px 10px; border-radius: 30px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; display: inline-block;}
+.badge-admin { background: #E3F2FD; color: #0D47A1; }
+.badge-cliente { background: #F5F5F5; color: #424242; }
+
+.status-indicator { display: inline-flex; align-items: center; font-size: 0.9rem; font-weight: 500; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.status-dot.active { background: #4CAF50; box-shadow: 0 0 8px #4CAF50; }
+.status-dot.inactive { background: #F44336; box-shadow: 0 0 8px #F44336; }
+
+/* ESTILOS DEL MODAL */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transform: translateY(-20px); transition: transform 0.3s ease; }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-content h2 { font-family: 'Fredoka', sans-serif; color: #5D4B43; margin-top: 0; margin-bottom: 20px; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; color: #5D4B43; font-weight: 500; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.btn-cancelar { background: #eee; color: #666; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; }
+.btn-cancelar:hover { background: #ddd; }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="sidebar">
+        <h2>✿ Admin</h2>
+        <ul>
+            <li><a href="admin.html"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Inicio</a></li>
+            <li><a href="admin_productos.html"><i class="fa-solid fa-box" style="margin-right: 8px;"></i> Inventario</a></li>
+            <li><a href="admin_pedidos.html"><i class="fa-solid fa-truck-ramp-box" style="margin-right: 8px;"></i> Logística Órdenes</a></li>
+            <li><a href="admin_usuarios.html" class="active"><i class="fa-solid fa-users" style="margin-right: 8px;"></i> Usuarios</a></li>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+            <li><a href="index.html"><i class="fa-solid fa-globe" style="margin-right: 8px;"></i> Ver Sitio Web</a></li>
+            <li><a onclick="cerrarSesion()"><i class="fa-solid fa-door-open" style="margin-right: 8px;"></i> Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header-admin">
+            <div>
+                <h1>Control de Usuarios</h1>
+                <p id="bienvenida-admin">Gestión de Cuentas y Permisos</p>
+            </div>
+        </div>
+
+        <div class="tabla">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Comunidad MomMiel</h2>
+                <button class="btn-nuevo" onclick="abrirModalUsuario()"><i class="fa-solid fa-user-plus" style="margin-right: 8px;"></i> Nuevo Usuario</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">ID</th>
+                        <th style="width: 25%;">Nombre Completo</th>
+                        <th style="width: 25%;">Correo Electrónico</th>
+                        <th style="width: 12%; text-align: center;">Rol</th>
+                        <th style="width: 15%;">Fecha Registro</th>
+                        <th style="width: 15%; text-align: center;">Acción / Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-usuarios-admin">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #C8A98D; margin-right: 8px;"></i> Consultando base de datos de usuarios...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalUsuario">
+    <div class="modal-content">
+        <h2>Registrar Nuevo Usuario 𖠋♡𖠋</h2>
+        <form id="formUsuario">
+            <div class="form-group">
+                <label for="userNombre">Nombre Completo</label>
+                <input type="text" id="userNombre" required placeholder="Ej. Juan Pérez">
+            </div>
+            <div class="form-group">
+                <label for="userCorreo">Correo Electrónico</label>
+                <input type="email" id="userCorreo" required placeholder="juan@correo.com">
+            </div>
+            <div class="form-group">
+                <label for="userPassword">Contraseña Inicial</label>
+                <input type="password" id="userPassword" required placeholder="Mínimo 6 caracteres">
+            </div>
+            <div class="form-group">
+                <label for="userRol">Rol asignado</label>
+                <select id="userRol">
+                    <option value="cliente">Cliente</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" onclick="cerrarModalUsuario()">Cancelar</button>
+                <button type="submit" class="btn-nuevo" style="padding: 10px 20px;" id="btnGuardarUser">Crear Cuenta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+const token = localStorage.getItem('token_mommiel');
+const rol = localStorage.getItem('user_role') || localStorage.getItem('user_rol');
+const nombreAdmin = localStorage.getItem('user_nombre');
+
+if (!token || rol !== 'administrador') {
+    window.location.href = 'login.html';
+} else {
+    document.getElementById('bienvenida-admin').innerText = `Visualizando cuentas como: ${nombreAdmin} 𖠋♡𖠋`;
+}
+
+const API_URL = "https://api-mommiel-1.onrender.com/api";
+
+// Creamos un array global para respaldar temporalmente los datos descargados del servidor
+let usuariosCargados = [];
+
+// 1. LEER LOS USUARIOS DE LA BD
+async function consultarUsuarios() {
+    const tbody = document.getElementById('tabla-usuarios-admin');
+    try {
+        const response = await fetch(`${API_URL}/admin/usuarios`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const resultado = await response.json();
+
+        if (resultado.status === 'success') {
+            // Guardamos el padrón en nuestra memoria temporal para que toggleEstadoUsuario tenga acceso
+            usuariosCargados = resultado.data || [];
+            tbody.innerHTML = '';
+
+            if (usuariosCargados.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #888; padding:20px;">No hay usuarios registrados.</td></tr>`;
+                return;
+            }
+
+            usuariosCargados.forEach(u => {
+                const fechaRegistro = new Date(u.fecha_registro).toLocaleDateString('es-MX', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                });
+
+                const claseRol = u.rol === 'administrador' ? 'badge-admin' : 'badge-cliente';
+                const esActivo = u.activo === 1;
+                const estadoTexto = esActivo ? 'Activo' : 'Suspendido';
+                const clasePunto = esActivo ? 'active' : 'inactive';
+                
+                const textoBoton = esActivo ? '<i class="fa-solid fa-user-slash"></i> Suspender' : '<i class="fa-solid fa-user-check"></i> Activar';
+                const claseBoton = esActivo ? 'suspender' : 'activar';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>#${u.id}</strong></td>
+                        <td><span style="color: #5D4B43; font-weight: 600;">${u.nombre}</span></td>
+                        <td style="color: #666;">${u.correo}</td>
+                        <td style="text-align: center;"><span class="badge-rol ${claseRol}">${u.rol}</span></td>
+                        <td style="font-size: 0.85rem; color: #8A766D;">${fechaRegistro}</td>
+                        <td style="text-align: center;">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                                <span class="status-indicator" style="margin-bottom: 4px;">
+                                    <span class="status-dot ${clasePunto}"></span> ${estadoTexto}
+                                </span>
+                                <button class="btn ${claseBoton}" style="font-size:0.75rem; padding: 5px 10px; width: 110px;" onclick="toggleEstadoUsuario(${u.id}, ${u.activo})">
+                                    ${textoBoton}
+                                </button>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
+        }
+    } catch (error) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Error al consultar el padrón de usuarios.</td></tr>`;
+    }
+}
+
+// 2. MODIFICAR EL ESTADO (ACTIVO/INACTIVO) DE UN USUARIO EXISTENTE
+async function toggleEstadoUsuario(idUsuario, estadoActual) {
+    const nuevoEstado = estadoActual === 1 ? 0 : 1;
+    const accionTexto = nuevoEstado === 1 ? "activar" : "suspender";
+
+    if (!confirm(`¿Estás seguro de que deseas ${accionTexto} a este usuario?`)) return;
+
+    // Buscamos el objeto original del usuario dentro de nuestro respaldo en memoria
+    const usuarioOriginal = usuariosCargados.find(user => user.id === idUsuario);
+    if (!usuarioOriginal) {
+        alert("No se encontraron los datos locales de este usuario.");
+        return;
+    }
+
+    // Estructuramos el payload completo tal cual lo espera recibir el struct "adminActualizarUsuario" en Go
+    const payloadModificado = {
+        nombre: usuarioOriginal.nombre,
+        correo: usuarioOriginal.correo,
+        rol: usuarioOriginal.rol,
+        activo: nuevoEstado
+    };
+
+    try {
+        const response = await fetch(`${API_URL}/admin/usuarios/${idUsuario}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payloadModificado)
+        });
+        
+        const data = await response.json();
+        if (response.ok && data.status === 'success') {
+            consultarUsuarios(); // Recarga la tabla de inmediato con el estado fresco
+        } else {
+            alert(`Error: ${data.message || 'No se pudo cambiar el estado del usuario.'}`);
+        }
+    } catch (error) {
+        console.error("Error al actualizar estado:", error);
+        alert("Fallo de conexión con Render al procesar la cuenta.");
+    }
+}
+
+// 3. FUNCIONES DEL MODAL DE REGISTRO
+function abrirModalUsuario() {
+    document.getElementById('formUsuario').reset();
+    document.getElementById('modalUsuario').classList.add('active');
+}
+function cerrarModalUsuario() {
+    document.getElementById('modalUsuario').classList.remove('active');
+}
+
+// 4. GUARDAR / REGISTRAR EL NUEVO USUARIO 
+document.getElementById('formUsuario').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const nombre = document.getElementById('userNombre').value.trim();
+    const correo = document.getElementById('userCorreo').value.trim();
+    const contrasena = document.getElementById('userPassword').value;
+    const rolAsignado = document.getElementById('userRol').value;
+    
+    const btn = document.getElementById('btnGuardarUser');
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/admin/usuarios/crear`, { 
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ nombre, correo, contrasena, rol: rolAsignado })
+        });
+        
+        const data = await response.json();
+
+        if (response.ok && data.status === 'success') {
+            alert(' Usuario registrado exitosamente.');
+            cerrarModalUsuario();
+            consultarUsuarios(); // Recarga la tabla con los datos frescos
+        } else {
+            alert(`Error: ${data.message || 'El correo ya podría estar en uso.'}`);
+        }
+    } catch (error) {
+        console.error("Error al registrar:", error);
+        alert('Fallo de red al conectar con el servidor de registro.');
+    } finally {
+        btn.disabled = false;
+    }
+});
+
+function cerrarSesion() { localStorage.clear(); window.location.href = 'login.html'; }
+document.addEventListener('DOMContentLoaded', consultarUsuarios);
+</script>
+</body>
+</html>

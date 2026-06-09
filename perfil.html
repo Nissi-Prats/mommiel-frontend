@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | MomMiel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .perfil-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media (min-width: 768px) {
+            .perfil-grid { grid-template-columns: 1fr 2fr; }
+        }
+        .form-control-mommiel {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        .btn-mommiel {
+            background-color: #C8A98D;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
+        }
+        .btn-mommiel:hover { background-color: #b5957a; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <header class="navbar-mommiel" style="padding: 15px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-family: 'Fredoka', sans-serif; color: #C8A98D; margin: 0; cursor: pointer;" onclick="window.location.href='index.html'">🌸 MomMiel</h2>
+        <a href="index.html" style="text-decoration: none; color: #666; font-family: 'Poppins', sans-serif;">← Volver al Inicio</a>
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 20px; font-family: 'Poppins', sans-serif;">
+        <div class="perfil-grid">
+            
+            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content;">
+                <h3 style="font-family: 'Fredoka', sans-serif; color: #5c4b47; margin-top: 0;">Mis Datos 𖠋</h3>
+                <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Mantén tu información actualizada para tus envíos.</p>
+                
+                <form id="formActualizarPerfil">
+                    <label style="font-size: 0.9rem; font-weight: 500; color: #5c4b47;">Nombre Completo</label>
+                    <input type="text" id="updateNombre" class="form-control-mommiel" required placeholder="Tu nombre">
+
+                    <hr style="border: 0; border-top: 1px dashed #eee; margin: 20px 0;">
+                    <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">⚠️ Llena los campos de abajo solo si deseas cambiar tu contraseña actual.</p>
+
+                    <label style="font-size: 0.9rem; font-weight: 500; color: #5c4b47;">Nueva Contraseña</label>
+                    <input type="password" id="updatePassword" class="form-control-mommiel" placeholder="Mínimo 6 caracteres">
+
+                    <label style="font-size: 0.9rem; font-weight: 500; color: #5c4b47;">Confirmar Nueva Contraseña</label>
+                    <input type="password" id="updatePasswordConfirm" class="form-control-mommiel" placeholder="Repite tu contraseña">
+
+                    <button type="submit" class="btn-mommiel" id="btnGuardarDatos">Guardar Cambios</button>
+                </form>
+            </div>
+
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h1 style="font-family: 'Fredoka', sans-serif; color: #5c4b47; margin-top:0; margin-bottom: 5px;">Mis Pedidos 🗪</h1>
+                <p class="text-muted" style="margin-bottom: 25px;">Consulta las compras que has realizado.</p>
+
+                <div id="contenedorPedidos">
+                    <div style="text-align: center; padding: 40px;" id="estadoCarga">
+                        <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: #C8A98D; margin-bottom: 10px;"></i>
+                        <p>Cargando tu historial de compras...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/perfil.js"></script>
+</body>
+</html>
