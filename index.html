@@ -21,10 +21,14 @@
             <li><a href="#testimonios">Opiniones</a></li>
             <li id="nav-ingresar"><a href="login.html">Ingresar</a></li>
             <li id="nav-carrito" style="display: none;">
-            <a href="carrito.html" style="font-weight: 500;">Mi Carrito </a>
-        </li>
-            <li id="nav-usuario" style="display: none;"><a href="#" style="font-weight: 600; color: #C8A98D;" id="nombre-perfil">Hola</a></li>
-            <li id="nav-logout" style="display: none;"><a href="#" onclick="ejecutarCerrarSesion()">Cerrar Sesión</a></li>
+                <a href="carrito.html" style="font-weight: 500;">Mi Carrito </a>
+            </li>
+            <li id="nav-usuario" style="display: none;">
+                <a href="#" style="font-weight: 600; color: #C8A98D;" id="nombre-perfil">Hola</a>
+            </li>
+            <li id="nav-logout" style="display: none;">
+                <a href="#" onclick="ejecutarCerrarSesion()">Cerrar Sesión</a>
+            </li>
         </ul>
         <div class="menu-btn">☰</div>
     </nav>
@@ -162,7 +166,27 @@
 const API_URL = "https://api-mommiel-1.onrender.com/api";
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. CONTROL DE SESIÓN
+    // 1. MENU HAMBURGUESA RESPONSIVO (Activa y desactiva el menú móvil)
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Cambia el icono de barras (☰) por una equis (✕) al estar abierto
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Cierra el menú al hacer clic en cualquier enlace interno (efecto ancla)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            });
+        });
+    }
+
+    // 2. CONTROL DE SESIÓN
     const token = localStorage.getItem('token_mommiel');
     const nombre = localStorage.getItem('user_nombre');
     const rol = localStorage.getItem('user_rol');
@@ -172,8 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const liLogout = document.getElementById('nav-logout');
     const txtPerfil = document.getElementById('nombre-perfil');
     const btnHero = document.getElementById('btn-hero-accion');
-    
-    // Capturamos el nuevo elemento de la lista para el carrito
     const liCarrito = document.getElementById('nav-carrito');
 
     if (token && nombre) {
@@ -184,15 +206,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (rol === 'administrador') {
                 txtPerfil.innerText = `✞ ${nombre} (Admin)`;
                 txtPerfil.href = 'admin.html';
-                
-                //  Si es administrador, ocultamos el carrito para no saturar su barra
                 if (liCarrito) liCarrito.style.display = 'none';
             } else {
                 txtPerfil.innerText = `✿ Hola, ${nombre}`;
                 txtPerfil.href = 'perfil.html'; 
                 txtPerfil.style.cursor = 'pointer';
-                
-                //  Si es usuario normal, mostramos el módulo del carrito con orgullo
                 if (liCarrito) liCarrito.style.display = 'block';
             }
         }
@@ -203,11 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btnHero.href = "blog.html"; 
         }
     } else {
-        //  Si no hay token, garantizamos que el carrito no se muestre bajo ninguna circunstancia
         if (liCarrito) liCarrito.style.display = 'none';
     }
 
-    // 2. DISPARAR LA CARGA DE PRODUCTOS POPULARES
+    // 3. DISPARAR LA CARGA DE PRODUCTOS POPULARES
     cargarProductosPopulares();
 });
 

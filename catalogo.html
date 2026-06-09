@@ -113,7 +113,25 @@
 const API_URL = "https://api-mommiel-1.onrender.com/api";
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. CONTROL DE SESIÓN EN NAVBAR
+    // 1. MENU HAMBURGUESA RESPONSIVO (Arreglo para el menú colapsable en móvil)
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            });
+        });
+    }
+
+    // 2. CONTROL DE SESIÓN EN NAVBAR
     const token = localStorage.getItem('token_mommiel');
     const nombre = localStorage.getItem('user_nombre');
     const rol = localStorage.getItem('user_rol');
@@ -139,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (liLogout) liLogout.style.display = 'block'; 
     }
 
-    // 2. DISPARAR LA CARGA DE LA TIENDA 
+    // 3. DISPARAR LA CARGA DE LA TIENDA 
     cargarTiendaPorEtapas();
 });
 
@@ -170,47 +188,47 @@ async function cargarTiendaPorEtapas() {
         let totalCat2 = 0;
         let totalCat3 = 0;
 
-listaProductos.forEach(p => {
-    let rutaImagenLocal = "";
-    let perteneceACategoria = 0;
+        listaProductos.forEach(p => {
+            let rutaImagenLocal = "";
+            let perteneceACategoria = 0;
 
-    // usando el id_categoria numérico de  INSERTS
-    if (p.id_categoria === 1) {
-        rutaImagenLocal = `img/categoria1/${p.imagen}`;
-        perteneceACategoria = 1;
-    } else if (p.id_categoria === 2) {
-        rutaImagenLocal = `img/categoria2/${p.imagen}`;
-        perteneceACategoria = 2;
-    } else if (p.id_categoria === 3) {
-        rutaImagenLocal = `img/categoria3/${p.imagen}`;
-        perteneceACategoria = 3;
-    } else {
-        // Respaldo por si algún producto tiene categoría 0 o nula
-        rutaImagenLocal = `img/${p.imagen}`;
-    }
+            // usando el id_categoria numérico de INSERTS
+            if (p.id_categoria === 1) {
+                rutaImagenLocal = `img/categoria1/${p.imagen}`;
+                perteneceACategoria = 1;
+            } else if (p.id_categoria === 2) {
+                rutaImagenLocal = `img/categoria2/${p.imagen}`;
+                perteneceACategoria = 2;
+            } else if (p.id_categoria === 3) {
+                rutaImagenLocal = `img/categoria3/${p.imagen}`;
+                perteneceACategoria = 3;
+            } else {
+                // Respaldo por si algún producto tiene categoría 0 o nula
+                rutaImagenLocal = `img/${p.imagen}`;
+            }
 
-    // Estructura visual de tarjeta con el diseño nativo de MomMiel
-    const tarjetaHTML = `
-        <div class="producto">
-            <img src="${rutaImagenLocal}" alt="${p.nombre}" onerror="this.src='img/flor.jpeg'">
-            <h3>${p.nombre}</h3>
-            <span>$${parseFloat(p.precio).toFixed(2)}</span>
-            <button onclick="window.location.href='producto.html?id=${p.id}'">Ver Producto</button>
-        </div>
-    `;
+            // Estructura visual de tarjeta con el diseño nativo de MomMiel
+            const tarjetaHTML = `
+                <div class="producto">
+                    <img src="${rutaImagenLocal}" alt="${p.nombre}" onerror="this.src='img/flor.jpeg'">
+                    <h3>${p.nombre}</h3>
+                    <span>$${parseFloat(p.precio).toFixed(2)}</span>
+                    <button onclick="window.location.href='producto.html?id=${p.id}'">Ver Producto</button>
+                </div>
+            `;
 
-    // Inyección limpia en el contenedor correspondiente
-    if (perteneceACategoria === 1 && cat1) {
-        cat1.innerHTML += tarjetaHTML;
-        totalCat1++;
-    } else if (perteneceACategoria === 2 && cat2) {
-        cat2.innerHTML += tarjetaHTML;
-        totalCat2++;
-    } else if (perteneceACategoria === 3 && cat3) {
-        cat3.innerHTML += tarjetaHTML;
-        totalCat3++;
-    }
-});
+            // Inyección limpia en el contenedor correspondiente
+            if (perteneceACategoria === 1 && cat1) {
+                cat1.innerHTML += tarjetaHTML;
+                totalCat1++;
+            } else if (perteneceACategoria === 2 && cat2) {
+                cat2.innerHTML += tarjetaHTML;
+                totalCat2++;
+            } else if (perteneceACategoria === 3 && cat3) {
+                cat3.innerHTML += tarjetaHTML;
+                totalCat3++;
+            }
+        });
 
         // Mensajes de validación por si alguna sección queda en blanco
         const msgVacio = '<p style="grid-column: 1/-1; text-align: center; color: #8A766D;">No hay productos disponibles por el momento.</p>';
