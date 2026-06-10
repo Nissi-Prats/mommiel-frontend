@@ -3,294 +3,435 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperacion - MomMiel</title>
+    <title>Recuperacion postparto - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-recuperacion {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-recuperacion,
+        .pagina-recuperacion * {
+            box-sizing: border-box;
+        }
+
+        .hero-recuperacion,
+        .bloque-recuperacion,
+        .tarjeta-recuperacion,
+        .nota-recuperacion,
+        .imagen-recuperacion {
+            border-radius: 24px;
+        }
+
+        .hero-recuperacion {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #fff8f6 0%, #ffffff 52%, #edf3ee 100%);
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-recuperacion h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.08;
+            text-align: left;
+        }
+
+        .pagina-recuperacion p,
+        .pagina-recuperacion li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-recuperacion {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .imagen-recuperacion {
+            width: 100%;
+            min-height: 330px;
+            max-height: 470px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .bloque-recuperacion {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-recuperacion {
+            max-width: 820px;
+            margin: 0 0 24px;
+        }
+
+        .grid-dos,
+        .grid-tres,
+        .grid-cuatro {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-cuatro {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .tarjeta-recuperacion {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-recuperacion h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .tarjeta-recuperacion p:last-child,
+        .bloque-recuperacion p:last-child,
+        .nota-recuperacion p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .nota-recuperacion {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .resumen-recuperacion {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .resumen-recuperacion span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .78);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .galeria-recuperacion {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .galeria-recuperacion img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(105, 82, 75, .12);
+        }
+
+        .acciones-recuperacion {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-cuatro {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-recuperacion,
+            .grid-dos,
+            .grid-tres,
+            .grid-cuatro,
+            .galeria-recuperacion,
+            .resumen-recuperacion {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-recuperacion,
+            .bloque-recuperacion {
+                padding: 24px;
+            }
+
+            .imagen-recuperacion,
+            .galeria-recuperacion img {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">Tiempos y recuperación postparto tras un parto vaginal</h2>
-</div>
-
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/1200x/08/21/f6/0821f62b764b889a571cff8f516c5e19.jpg" alt="Verde">
-
-</div>
-</div>
-</div>
-</section>
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-<p>
-No debemos olvidar, antes de explicar los cambios que se producen en el postparto, que hablamos en términos generales de uno de los momentos y experiencias más emocionantes y gratificantes que van a suceder a lo largo de la vida de cualquier mujer. La responsabilidad y gratificación que va a suponer aportar una nueva vida merece seguir los controles y consejos de los profesionales adecuados.
-</p>
-
-<p> 
-Cierto es que se producen cambios que en algunos momentos provocan efectos que llegan a ser desagradables. Sin embargo, disponemos de un arsenal de soluciones para reparar o aliviar de manera efectiva cualquier molestia.
-</p>
-
-<p>
-Una vez la mujer ha dado a luz se inicia un periodo de apróximadamente cuarenta días conocido como puerperio o ‘cuarentena’. Los órganos vitales irán volviendo a la normalidad de forma progresiva, así como el estado general de la madre. No obstante, cómo se desarrollen estas primeras semanas después del parto dependerá, en gran medida, de la tipología específica del mismo. Hoy hablaremos del postparto tras un parto vaginal.
-</p>
-
-</div>
-</div>
-</div>
-</seccion>
-
-
-
-
-
-
-<section class="seccion-destacada">
-<div class="tarjeta-ancha">
-<h2 class="titulo-articulo" >Postparto: qué cambios se producirán en mi cuerpo</h2>
-<section class="galeria-tres-columnas">
-<div class="container">    
-<div class="galeria-grid">
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-<strong>
-Zona perineal
-</strong>
-</p>
-<p>
-Después de un parto vaginal, la zona perineal puede presentar inflamación o hinchazón. Como consecuencia de esto, la mujer puede sentir molestias al sentarse o al orinar. En caso de haber sido necesaria la realización de una episiotomía o de haberse producido desgarros durante el parto, la recuperación será más lenta y las molestias más intensas. No se deben por tanto mantener relaciones sexuales ni practicar deportes o darse baños de inmersión durante este tiempo.
-</p>
-</div>
-</div>
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-<strong>
-Sequedad vaginal
-</strong>
-</p>
-
-<p>
-Asimismo, la lactancia está asociada a cambios hormonales de diferente intensidad. Estos pueden derivar en sequedad genital, dificultando aún más las relaciones sexuales.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Molestias intermitentes
-</strong>
-</p>
-
-<p>
-Existen probabilidades de que aparezcan dolores intermitentes o ‘entuertos’ debido a las contracciones del útero durante la lactancia. Su objetivo es favorecer su retorno al tamaño normal y evitar hemorragias de riesgo.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Problemas circulatorios
-</strong>
-</p>
-
-<p>
-Los problemas circulatorios también son muy comunes y se traducen en hinchazón en las piernas. La aplicación de tratamientos preventivos o paliativos ayudará a reducir el riesgo de trombosis venosa. Además de a disminuir, incluso eliminar, las varices, edemas o hemorroides que hayan podido desarrollarse durante el embarazo.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Escapes de orina
-</strong>
-</p>
-
-<p>
-Tanto los escapes repentinos de orina como los retrasos en el vaciamiento de la vejiga pueden darse como consecuencia de la inflamación de toda la región. Esta situación puede llegar a provocar pérdida de sensibilidad que, en la mayoría de casos, con un correcto tratamiento y un adecuado seguimiento es completamente reversible.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Desórdenes digestivos
-</strong>
-</p>
-
-<p>
-Poco a poco algunos de los malestares digestivos asociados al embarazo, tales como el estreñimiento, el ardor y los vómitos, irán desapareciendo. Y estos pueden dar paso a un aumento de los gases debido a la acomodación del intestino tras disminuir repentinamente el tamaño del útero.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Zona abdominal
-</strong>
-</p>
-
-<p>
-Las estructuras óseas y musculares que han sufrido cambios durante el embarazo también irán recuperándose paulatinamente. Conviene destacar que, en el caso específico de la zona abdominal, el tono será mínimo. Precisamente por este motivo, no se recomienda cargar pesos o realizar esfuerzos en los que esta musculatura o la de la espalda estén implicadas. Asimismo, se desaconseja el uso recurrente de fajas abdominales, pues disminuyen la actividad de la musculatura y pueden ralentizar la recuperación.
-</p>
-</div>
-</div>
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p><strong>
-Otros cambios durante el postparto
-</strong>
-</p>
-
-<p>
-En último lugar, la influencia hormonal del embarazo modifica de igual manera las propiedades elásticas de los ligamentos de la pelvis y la columna. Necesitarán un periodo de adaptación hasta conseguir sujetar con firmeza las estructuras óseas.
-</p>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-
-</section>
-</section>
-
-
-<section class="galeria-tres-columnas">
-    <div class="container">        
-        <div class="galeria-grid">
-
-            <!-- Tarjeta de Imagen 1 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/31/f0/ae/31f0ae725fb4fd9059b09a5a340bf885.jpg" alt="Cabeza">
-            </div>
-
-            <!-- Tarjeta de Imagen 2 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/e2/bf/54/e2bf5462d81667608dde6f364fa8e3bc.jpg" alt="Sueter">
-            </div>
-
-            <!-- Tarjeta de Imagen 3 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/d1/6f/9d/d16f9dbd01d08075d28adacf88310280.jpg" alt="Tres">
+<main class="caja-unica pagina-recuperacion">
+    <section class="hero-recuperacion">
+        <div>
+            <span class="badge-recuperacion">Postparto vaginal</span>
+            <h1>Tiempos y recuperacion despues del parto</h1>
+            <p>
+                El puerperio, tambien conocido como cuarentena, es un periodo de aproximadamente
+                cuarenta dias en el que el cuerpo empieza a volver poco a poco a su equilibrio.
+                Cada recuperacion es distinta y merece acompanamiento, paciencia y cuidado.
+            </p>
+            <div class="resumen-recuperacion" aria-label="Resumen del postparto">
+                <span>Descanso</span>
+                <span>Cuidados</span>
+                <span>Seguimiento</span>
             </div>
         </div>
+        <img class="imagen-recuperacion" src="https://i.pinimg.com/1200x/08/21/f6/0821f62b764b889a571cff8f516c5e19.jpg" alt="Madre descansando despues del parto">
+    </section>
+
+    <section class="bloque-recuperacion">
+        <h2 class="titulo-seccion">Un proceso gradual</h2>
+        <div class="grid-dos">
+            <div>
+                <p>
+                    Despues de dar a luz, los organos y el estado general de la madre van
+                    recuperandose de forma progresiva. Aunque algunos cambios pueden ser incomodos,
+                    existen soluciones para aliviar molestias y favorecer una recuperacion saludable.
+                </p>
+                <p>
+                    La manera en que se viven estas primeras semanas depende de muchos factores:
+                    el tipo de parto, el descanso, la lactancia, el apoyo disponible y el seguimiento
+                    de profesionales de salud.
+                </p>
+            </div>
+            <div class="nota-recuperacion">
+                <p>
+                    Esta guia ofrece informacion general sobre el postparto despues de un parto
+                    vaginal. Si presentas dolor intenso, fiebre, sangrado abundante o sintomas que
+                    te preocupen, consulta de inmediato con tu profesional de salud.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bloque-recuperacion">
+        <h2 class="titulo-seccion">Cambios frecuentes en el cuerpo</h2>
+        <p class="subtitulo-recuperacion">
+            Estos cambios pueden aparecer durante las primeras semanas. No todas las mujeres los
+            viven igual, pero conocerlos ayuda a identificarlos y pedir apoyo cuando sea necesario.
+        </p>
+        <div class="grid-cuatro">
+            <article class="tarjeta-recuperacion">
+                <h3>Zona perineal</h3>
+                <p>
+                    Puede haber inflamacion, molestias al sentarse o al orinar. Si hubo episiotomia
+                    o desgarros, la recuperacion puede ser mas lenta.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Sequedad vaginal</h3>
+                <p>
+                    La lactancia y los cambios hormonales pueden causar sequedad genital y hacer que
+                    las relaciones sexuales resulten incomodas al inicio.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Entuertos</h3>
+                <p>
+                    Son dolores intermitentes por las contracciones del utero, que ayudan a que
+                    vuelva a su tamano normal y reducen el riesgo de hemorragias.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Circulacion</h3>
+                <p>
+                    La hinchazon de piernas, varices, edemas o hemorroides pueden mejorar con
+                    movimiento progresivo y medidas indicadas por profesionales.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Escapes de orina</h3>
+                <p>
+                    Pueden aparecer por la inflamacion de la zona pelvica. Con seguimiento adecuado,
+                    muchas molestias son reversibles.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Digestivo</h3>
+                <p>
+                    El estrenimiento, ardor o vomitos del embarazo suelen disminuir, aunque pueden
+                    aparecer gases mientras el intestino se reajusta.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Zona abdominal</h3>
+                <p>
+                    El tono muscular estara reducido. Conviene evitar cargar peso o hacer esfuerzos
+                    fuertes durante las primeras semanas.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Pelvis y columna</h3>
+                <p>
+                    Los ligamentos necesitan tiempo para recuperar firmeza despues de los cambios
+                    hormonales y fisicos del embarazo.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="galeria-recuperacion" aria-label="Galeria de recuperacion postparto">
+        <img src="https://i.pinimg.com/736x/31/f0/ae/31f0ae725fb4fd9059b09a5a340bf885.jpg" alt="Descanso postparto">
+        <img src="https://i.pinimg.com/736x/e2/bf/54/e2bf5462d81667608dde6f364fa8e3bc.jpg" alt="Cuidado y calma despues del parto">
+        <img src="https://i.pinimg.com/736x/d1/6f/9d/d16f9dbd01d08075d28adacf88310280.jpg" alt="Maternidad y recuperacion">
+    </section>
+
+    <section class="bloque-recuperacion">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Consejos para tu bienestar</h2>
+                <p>
+                    La recuperacion se construye con pequenas acciones diarias. Lo importante es
+                    avanzar de forma gradual y buscar orientacion cuando algo no se sienta bien.
+                </p>
+            </div>
+            <ul class="lista-cuidada">
+                <li>Mantener una dieta variada con liquidos, frutas, verduras y fibra.</li>
+                <li>Aplicar compresas frias si hay molestias en la zona perineal.</li>
+                <li>Usar lubricante si hay sequedad genital.</li>
+                <li>Caminar poco a poco, aumentando el tiempo de forma progresiva.</li>
+                <li>Vaciar la vejiga con frecuencia.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="bloque-recuperacion">
+        <h2 class="titulo-seccion">Cuando buscar apoyo especializado</h2>
+        <div class="grid-tres">
+            <article class="tarjeta-recuperacion">
+                <h3>Suelo pelvico</h3>
+                <p>
+                    Si persisten escapes de orina, dolor o sensacion de debilidad, una valoracion de
+                    fisioterapia puede orientar la recuperacion.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Abdomen</h3>
+                <p>
+                    Despues de la cuarentena, un especialista puede revisar la musculatura abdominal
+                    y pelvica antes de iniciar ejercicios mas especificos.
+                </p>
+            </article>
+            <article class="tarjeta-recuperacion">
+                <h3>Movimiento</h3>
+                <p>
+                    Los ejercicios hipopresivos o isometricos pueden ayudar, pero es mejor realizarlos
+                    cuando tu cuerpo este listo y con indicacion profesional.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="nota-recuperacion">
+        <p>
+            No necesitas recuperarte a prisa. Tu cuerpo acaba de atravesar una experiencia enorme:
+            escucha sus senales, acepta ayuda y acude a tus revisiones medicas para cuidar tu salud.
+        </p>
+    </section>
+
+    <div class="acciones-recuperacion">
+        <a href="blog.html" class="btn btn-primary">salir</a>
     </div>
-</section>
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-
-<p><strong> Consejos postparto para el bienestar de las mujeres tras un parto natural </strong></p>
-<p>
-❤︎︎En orden de acelerar la recuperación postparto y mejorar el bienestar de la madre, se recomienda:
-</p>
-
-<p> 
-❤︎︎Dieta adecuada y variada, destacando el consumo de líquidos, frutas, verduras y alimentos ricos en fibra.
-</p>
-<p>
-❤︎︎Consumir analgésicos y aplicar compresas frías para los dolores en la zona perineal.
-</p>
-<p>
-❤︎︎Emplear lubricantes para la sequedad genital.
-</p>
-<p>
-❤︎︎Caminar aumentando los tiempos de forma progresiva y realizar masajes con cremas hidratantes para mejorar la circulación de las piernas y restablecer la estructura y la función del aparato locomotor. Aquí podéis aplicar uno de los tratamientos que mencionamos en un artículo anterior sobre la osteoporosis: las bondades de los 10.000 pasos al día. Podría considerarse el ejercicio perfecto en las primeras semanas postparto, asociando los beneficios de la exposición al sol y la absorción de vitamina D. También se recomienda el uso de medias de compresión y/o de fármacos venotónicos.
-</p>
-<p>
-❤︎︎Vaciar con frecuencia la vejiga o un tratamiento más especializado de rehabilitación de suelo pélvico si las molestias en esta zona persisten.
-</p>
-<p>
-❤︎︎Una vez pasada la ‘cuarentena’, lo más recomendable es que la mamá acuda a una Unidad de Fisioterapia especializada. De esta manera, se valorarán las estructuras musculares y los ligamentos de las regiones abdominal y pélvica. En caso de notar alguna anomalía, el especialista diseñará un programa completo y personalizado de recuperación postparto.
-</p>
-<p>
-❤︎︎Realizar abdominales hipopresivos e isométricos transcurridos los primeros cuarenta días después del parto ayudará a la recuperación de los músculos abdominales y pélvicos.
-</p>
-</div>
-</div>
-</div>
-</seccion>
-
-
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="blog.html" class="btn btn-primary">SALIR</a>
-</div>
-</center>
-
-<br><br>
-
-
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
 </body>
 </html>
 

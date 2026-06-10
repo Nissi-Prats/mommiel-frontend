@@ -3,287 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutricion2 - MomMiel</title>
+    <title>Mitos de nutricion en el embarazo - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-nutricion2 {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-nutricion2,
+        .pagina-nutricion2 * {
+            box-sizing: border-box;
+        }
+
+        .hero-nutricion2,
+        .bloque-nutricion2,
+        .tarjeta-nutricion2,
+        .nota-nutricion2,
+        .imagen-nutricion2 {
+            border-radius: 24px;
+        }
+
+        .hero-nutricion2 {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #fff8f6 0%, #ffffff 50%, #eef4e9 100%);
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-nutricion2 h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.08;
+            text-align: left;
+        }
+
+        .pagina-nutricion2 p,
+        .pagina-nutricion2 li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-nutricion2 {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .imagen-nutricion2 {
+            width: 100%;
+            min-height: 330px;
+            max-height: 470px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .bloque-nutricion2 {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-nutricion2 {
+            max-width: 840px;
+            margin: 0 0 24px;
+        }
+
+        .grid-dos,
+        .grid-tres {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .tarjeta-nutricion2 {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-nutricion2 h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .etiqueta-mito {
+            display: inline-flex;
+            margin-bottom: 12px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .tarjeta-nutricion2 p:last-child,
+        .bloque-nutricion2 p:last-child,
+        .nota-nutricion2 p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .nota-nutricion2 {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .resumen-nutricion2 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .resumen-nutricion2 span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .78);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .galeria-nutricion2 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .galeria-nutricion2 img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(105, 82, 75, .12);
+        }
+
+        .acciones-nutricion2 {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-nutricion2,
+            .grid-dos,
+            .grid-tres,
+            .galeria-nutricion2,
+            .resumen-nutricion2 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-nutricion2,
+            .bloque-nutricion2 {
+                padding: 24px;
+            }
+
+            .imagen-nutricion2,
+            .galeria-nutricion2 img {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-
-<section class="seccion-articulo-destacado">
-<div class="container">  
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">
-Mitos de la alimentación en el embarazo
-</h2>
-<p>
-Durante el embarazo, es importante incrementar algunos nutrimentos.
-<br>
-Hoy en día aún existen muchos mitos alrededor del embarazo, ya sea respecto a los cuidados que la mujer debe tener, la alimentación, o incluso a la convivencia con mascotas. Muchas de estas ideas no tienen sustento médico o científico, pero son creencias que han pasado de generación en generación y que perduran en la actualidad.
-<br>
-
-Si estás embarazada, seguro has recibido consejos respecto a lo que debes y no, comer durante estas semanas de gestación.
-<br>
-
-<strong>A continuación, te ayudamos a tener más claro el panorama: </strong>
-
-</p>
-</div>
-
-
-<section class="galeria-tres-columnas">
-<div class="container">    
-
-<div class="galeria-grid">
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>Si estoy embarazada puedo comer lo que yo quiera:</h3>
-<p>
-Lo ideal es llevar una dieta variada para que tanto tú como tu bebé, reciban todos los nutrimentos que necesitan para estar saludables; es recomendable limitar la ingesta de grasas “malas”, la comida capeada y los irritantes, pues podrían provocarte malestares como agruras, reflujo o indigestión.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>Comer por dos es necesario:</h3>
-<p>
-No se trata de comer una cantidad mayor, pero sí de buscar que los alimentos que consumas sean de calidad, es decir, ricos en nutrimentos variados. Si te encontrabas en tu peso ideal al iniciar el embarazo, no eleves tu ingesta de calorías durante los primeros meses, pero agrega entre 300 y 500 calorías de manera saludable durante el segundo y tercer trimestre, respectivamente
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>Hay que eliminar algunos alimentos en la dieta: </h3>
-<p>
-Los siguientes alimentos crudos: carne, pescados, mariscos y huevo, para evitar el riesgo de intoxicación o infecciones provocadas por parásitos que pudieran contener. Carnes frías y quesos hechos con leche no pasteurizada, pues podrían estar contaminados con una bacteria llamada Listeria monocytogenes, mejor no los consumas y limita o retira la ingesta de azúcar añadida (es decir, la que no está naturalmente en el alimento), las grasas “malas” (como saturadas o trans), y los alimentos capeados e irritantes.
-</p>
-</div>
-</div>
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>No debes comer pescado:</h3>
-<p>
-El pescado es una gran fuente de omega-3 (DHA), sin embargo, lo recomendable es evitar comerlo crudo, puesto que no es sencillo saber que tan fresco o limpio está. Elige los que contengan bajos niveles de mercurio, como el salmón, los camarones, el atún enlatado y la sardina enlatada.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3> No puedes tomar café:</h3>
-<p>
-Aunque siempre está la opción descafeinada, existen estudios que indican que es seguro beber hasta 200 mg de cafeína al día, por lo que podrías consumir una a dos tazas; sin embargo, lo ideal es que lo consultes con tu profesional de la salud para conocer su opinión tomando en cuenta las características particulares de tu embarazo.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>El alcohol está prohibido:</h3>
-<p>
-Lo ideal es retirarlo por completo de la dieta durante el embarazo y la lactancia, pues no se sabe de una cantidad segura para tu bebé y es una sustancia nociva para su salud.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>Los alimentos picantes y la piña inducen al parto:</h3>
-<p>
-Los métodos naturales para inducir al parto no tienen evidencia científica. Se ha extendido la creencia de que cierta clase de alimentos ayudan a acelerar este proceso, pero no es así. Por el contrario, se han comprobado que tienen efectos en la alimentación de la gestante.  La piña, por ejemplo, puede producir acidez estomacal, por lo que se recomienda consumirla con moderación, mientras que los alimentos picantes generan varias molestias gastrointestinales. El momento en que se dará el parto no depende de tu alimentación, por lo tanto, enfócate en otorgarle a tu bebé todos los nutrientes que necesita.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>El riesgo de diabetes gestacional aumenta por la ingesta de azúcar:</h3>
-<p>
-El consumo excesivo de azúcar, sobre todo de la que es añadida en los alimentos, es un tema que no solo debe preocupar a las mujeres gestantes. Entidades como la OMS recomiendan limitar lo más que se pueda los productos que contienen este ingrediente en altas cantidades. Así que, si no tienes predisposiciones a convertirte en diabética, es probable que tu riesgo de padecer de esta enfermedad durante la gestación sea muy bajo. En caso de que aumenten los niveles de azúcar en la sangre, consulta con tu médico de inmediato.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3>Se pueden comer huevos en cualquier presentación: </h3>
-<p>
-En los huevos se debe evitar el riesgo de que puedan contener salmonela. En este sentido, es una buena idea investigar por productores certificados con el propósito de evitar riesgos. En cuanto a su preparación, la regla principal a cumplir es asegurarse que la yema y la clara estén muy bien cocinadas. De hecho, si no estás muy segura del origen del alimento, una buena idea es que procures consumirlo cuando esté completamente sólido, pues esto indica que la cocción es la adecuada. Evita al máximo comer huevos crudos o parcialmente cocinados, pueden ser riesgosos para tu embarazo.
-</p>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">        
-<div class="lista-tarjetas-etapas">
-
-
-<div class="tarjeta-etapa-individual">
-<h2>Tips para llevar un buen embarazo a través de la alimentación
-</h2>
-</div>
-
-<div class="tarjeta-etapa-individual">
-<p>
-Consume 5 raciones de frutas y/o verduras al día como mínimo, inclúyelas en cada una de tus comidas, pueden estar crudas o cocidas. Asegúrate de que estén correctamente lavadas y desinfectadas para que no tengan tierra.
-</p>
-</div>
-
-
-<div class="tarjeta-etapa-individual">
-<p>
-Come pan, tortilla, arroz, pasta o cereales en todas tus comidas para que puedas tener un aporte de energía adecuada. De preferencia que estos alimentos sean integrales para que te ayuden a combatir el estreñimiento, que puede ser muy común durante el embarazo.
-</p>
-</div>
-
-
-<div class="tarjeta-etapa-individual">
-<p>
-Se recomienda que las mujeres embarazadas coman 3 raciones de leche o alimentos derivados de leche como queso y yogurt porque son la mejor fuente de calcio para asegurar tus reservas en el embarazo. Verifica que sean pasteurizados, bajos en grasas y azúcar.
-</p>
-</div>
-
-
-<div class="tarjeta-etapa-individual">
-<p>
-1 o 2 alimentos de origen animal al día para el aporte de proteínas. Elige carnes con poca grasa como pechuga de pavo y pollo, bistec de res y pescados. Asegúrate de cocinarlos bien y no los consumas ahumados o crudos.
-</p>
-</div>
-
-
-<div class="tarjeta-etapa-individual">
-<p>
-Limita el consumo de: Aceites y grasas animales, dulces, bebidas endulzadas y refrescos, sal.
-</p>
-</div>
-
-<div class="tarjeta-etapa-individual">
-<p>
-Mantente hidratada tomando 10 vasos de líquidos al día, de preferencia agua purificada y evita el consumo de jugos azucarados y néctares.
-</p>
-</div>
-
-</div>
-</div>
-</section>
-
-
-
-
-<section class="galeria-tres-columnas">
-    <div class="container">        
-        <div class="galeria-grid">
-
-            <!-- Tarjeta de Imagen 1 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/73/05/29/73052929d63433006425bf31404d9cba.jpg" alt="Selfie">
-            </div>
-
-            <!-- Tarjeta de Imagen 2 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/1200x/9c/8f/f9/9c8ff9459dcea61fa6ab8fcb1f502df0.jpg" alt="Galletas">
-            </div>
-
-            <!-- Tarjeta de Imagen 3 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/1200x/9f/54/52/9f545245578e9adc72ab929b4eb81f7e.jpg" alt="Cinta">
+<main class="caja-unica pagina-nutricion2">
+    <section class="hero-nutricion2">
+        <div>
+            <span class="badge-nutricion2">Nutricion sin mitos</span>
+            <h1>Mitos de la alimentacion en el embarazo</h1>
+            <p>
+                Durante el embarazo es comun recibir consejos sobre que comer y que evitar. Algunas
+                ideas vienen de generaciones anteriores, pero no siempre tienen sustento medico o
+                cientifico. Esta guia te ayuda a mirar esos mitos con mas claridad.
+            </p>
+            <div class="resumen-nutricion2" aria-label="Resumen de la pagina">
+                <span>Mitos</span>
+                <span>Tips</span>
+                <span>Habitos</span>
             </div>
         </div>
+        <img class="imagen-nutricion2" src="https://i.pinimg.com/736x/73/05/29/73052929d63433006425bf31404d9cba.jpg" alt="Mujer embarazada cuidando su alimentacion">
+    </section>
+
+    <section class="bloque-nutricion2">
+        <h2 class="titulo-seccion">Mitos comunes</h2>
+        <p class="subtitulo-nutricion2">
+            Comer bien durante el embarazo no significa seguir reglas extremas. Significa elegir
+            opciones seguras, variadas y nutritivas segun tus necesidades.
+        </p>
+        <div class="grid-tres">
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Mito</span>
+                <h3>Puedo comer todo lo que quiera</h3>
+                <p>
+                    Lo ideal es llevar una dieta variada para que tu y tu bebe reciban los nutrientes
+                    necesarios. Conviene limitar grasas saturadas, comida capeada e irritantes si te
+                    provocan agruras, reflujo o indigestion.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Mito</span>
+                <h3>Hay que comer por dos</h3>
+                <p>
+                    No se trata de comer mucho mas, sino de comer mejor. En el segundo y tercer
+                    trimestre puede aumentar la necesidad de energia, pero debe hacerse con alimentos
+                    de buena calidad.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Cuidado</span>
+                <h3>Hay alimentos que conviene evitar</h3>
+                <p>
+                    Evita carne, pescado, mariscos y huevo crudos. Tambien carnes frias y quesos con
+                    leche no pasteurizada, por riesgo de infecciones como listeria.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Aclaracion</span>
+                <h3>No debes comer pescado</h3>
+                <p>
+                    El pescado puede aportar omega-3, pero debe estar bien cocido. Elige opciones con
+                    bajo mercurio como salmon, camarones, atun enlatado o sardina enlatada.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Aclaracion</span>
+                <h3>No puedes tomar cafe</h3>
+                <p>
+                    Algunas guias consideran segura una cantidad moderada de cafeina. Lo mejor es
+                    consultarlo con tu profesional de salud, especialmente si tu embarazo tiene
+                    caracteristicas particulares.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Importante</span>
+                <h3>El alcohol esta prohibido</h3>
+                <p>
+                    Lo ideal es retirarlo por completo durante el embarazo y la lactancia, ya que no
+                    se conoce una cantidad segura para el bebe.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Mito</span>
+                <h3>Picante y pina inducen el parto</h3>
+                <p>
+                    No hay evidencia solida de que estos alimentos induzcan el parto. En cambio,
+                    pueden causar acidez o molestias gastrointestinales.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Aclaracion</span>
+                <h3>El azucar causa diabetes gestacional</h3>
+                <p>
+                    El exceso de azucar anadida no es recomendable, pero el riesgo de diabetes
+                    gestacional depende de varios factores. Si tus niveles de glucosa suben, consulta
+                    con tu medico.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion2">
+                <span class="etiqueta-mito">Cuidado</span>
+                <h3>El huevo puede comerse de cualquier forma</h3>
+                <p>
+                    Para reducir el riesgo de salmonela, asegurate de que la clara y la yema esten
+                    bien cocidas. Evita huevos crudos o parcialmente cocidos.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-nutricion2">
+        <h2 class="titulo-seccion">Tips para un embarazo saludable</h2>
+        <div class="grid-dos">
+            <ul class="lista-cuidada">
+                <li>Consume al menos 5 raciones de frutas y verduras al dia.</li>
+                <li>Incluye pan, tortilla, arroz, pasta o cereales en tus comidas.</li>
+                <li>Prefiere cereales integrales para ayudar con el estrenimiento.</li>
+                <li>Elige lacteos pasteurizados, bajos en grasas y azucar.</li>
+            </ul>
+            <ul class="lista-cuidada">
+                <li>Incluye 1 o 2 alimentos de origen animal al dia, bien cocidos.</li>
+                <li>Limita aceites, grasas animales, dulces, bebidas endulzadas y sal.</li>
+                <li>Mantente hidratada, de preferencia con agua purificada.</li>
+                <li>Evita jugos azucarados y nectares como bebida habitual.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="galeria-nutricion2" aria-label="Galeria de nutricion en el embarazo">
+        <img src="https://i.pinimg.com/1200x/9c/8f/f9/9c8ff9459dcea61fa6ab8fcb1f502df0.jpg" alt="Alimentos para colacion">
+        <img src="https://i.pinimg.com/1200x/9f/54/52/9f545245578e9adc72ab929b4eb81f7e.jpg" alt="Cinta de medicion y alimentos">
+        <img src="https://i.pinimg.com/1200x/d9/b1/de/d9b1de1c8704cf40a372d1469d4af4bc.jpg" alt="Alimentos frescos y saludables">
+    </section>
+
+    <section class="bloque-nutricion2">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Programacion metabolica</h2>
+                <p>
+                    La nutricion durante el embarazo no solo influye en la formacion del bebe. Tambien
+                    puede participar en los habitos alimenticios que el bebe conocera desde la
+                    gestacion y reforzara mas adelante con la alimentacion complementaria.
+                </p>
+                <p>
+                    El feto se adapta a los nutrientes que recibe. Por eso, tanto una ingesta
+                    insuficiente como una ingesta excesiva pueden influir en la forma en que su
+                    organismo regula energia y apetito en el futuro.
+                </p>
+            </div>
+            <div class="nota-nutricion2">
+                <p>
+                    Mas que buscar perfeccion, la meta es construir habitos sostenibles: alimentos
+                    variados, porciones adecuadas, buena hidratacion y seguimiento profesional cuando
+                    existan dudas o condiciones especiales.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="nota-nutricion2">
+        <p>
+            Si tienes diabetes gestacional, anemia, nauseas intensas, bajo peso, sobrepeso u otra
+            condicion, pide orientacion personalizada. La alimentacion ideal es la que cuida tu salud
+            y se adapta a tu embarazo.
+        </p>
+    </section>
+
+    <div class="acciones-nutricion2">
+        <a href="Nutricion.html" class="btn btn-primary">ANTERIOR</a>
     </div>
-</section>
-
-
-
-<section class="seccion-destacada">
-<div class="tarjeta-ancha">
-<h2>¿Sabes qué es la programación metabólica?
-</h2>
-
-<p>
-¿Sabías que la importancia de la nutrición en el embarazo es tanta que no sólo influye en la formación de tu bebé? Desde el periodo de gestación, tu hijo también aprende sobre la alimentación que tendrá en su vida futura, pero ¿cómo es esto?
-</p>
-
-<p>La programación metabólica responde a esta pregunta, pues se refiere al aprendizaje de hábitos alimenticios que la madre enseña a su bebé durante el embarazo por medio de su propia ingesta alimenticia, y posteriormente durante los primeros meses de alimentos sólidos.
-</p>
-
-<p>En el periodo de gestación, el feto experimenta un proceso de aprendizaje y adaptación a los hábitos alimenticios que recibe de la madre; más adelante los reafirma o redefine con la Alimentación Complementaria, pues la cantidad de alimentos que consume y el tipo de éstos, programará su organismo a consumir ciertas porciones o alimentos, formando costumbres que podría mantener hasta su vida adulta.
-</p>
-
-<p>Si una madre gestante presenta desnutrición durante el primer trimestre, podría propiciar una tendencia a la obesidad en la vida adulta del pequeño. Los “genes ahorradores” son la consecuencia de que la madre haya tenido una baja ingesta de calorías durante el embarazo; provocando que, en el futuro, el niño presente sobrepeso por la retención de energía.
-</p>
-
-<p>Sin embargo, esta característica también sucede cuando existe una sobre ingesta alimenticia, pues el feto tiene la capacidad de cambiar su metabolismo de acuerdo a la cantidad de nutrimentos que esté recibiendo.
-</p>
-        
-</div>
-</section>
-
-
-
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="Nutricion.html" class="btn btn-primary">ANTERIOR</a>
-</div>
-</center>
-
-<br><br>
-
-
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
 </body>
 </html>
 

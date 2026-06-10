@@ -3,158 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lactansia - MomMiel</title>
+    <title>Lactancia - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-lactancia {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-lactancia,
+        .pagina-lactancia * {
+            box-sizing: border-box;
+        }
+
+        .hero-lactancia,
+        .bloque-lactancia,
+        .tarjeta-lactancia,
+        .nota-lactancia,
+        .imagen-lactancia {
+            border-radius: 24px;
+        }
+
+        .hero-lactancia {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #fff8f6 0%, #ffffff 50%, #f2ece3 100%);
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-lactancia h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.08;
+            text-align: left;
+        }
+
+        .pagina-lactancia p,
+        .pagina-lactancia li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-lactancia {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .imagen-lactancia {
+            width: 100%;
+            min-height: 330px;
+            max-height: 470px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .bloque-lactancia {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-lactancia {
+            max-width: 820px;
+            margin: 0 0 24px;
+        }
+
+        .grid-dos,
+        .grid-tres,
+        .grid-cuatro {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-cuatro {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            align-items: stretch;
+        }
+
+        .tarjeta-lactancia {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-lactancia h2,
+        .tarjeta-lactancia h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .tarjeta-lactancia p:last-child,
+        .bloque-lactancia p:last-child,
+        .nota-lactancia p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .nota-lactancia {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .resumen-lactancia {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .resumen-lactancia span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .75);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .acciones-lactancia {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-cuatro {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-lactancia,
+            .grid-dos,
+            .grid-tres,
+            .grid-cuatro,
+            .resumen-lactancia {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-lactancia,
+            .bloque-lactancia {
+                padding: 24px;
+            }
+
+            .imagen-lactancia {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-<section class="introduccion-tres-columnas">
-<div class="container text-center-box">
-<h1 class="titulo-grande">La leche materna es clave para el desarrollo cerebral</h1>
-        
-<p>
-Tu cuerpo es increíblemente sabio y produce la leche materna de una forma única y perfecta para tu bebé. Le da la mezcla ideal de proteínas y todos los nutrientes que necesita para que su cerebro crezca sano y se desarrolle plenamente.
-</p>
-<br>
+<main class="caja-unica pagina-lactancia">
+    <section class="hero-lactancia">
+        <div>
+            <span class="badge-lactancia">Lactancia materna</span>
+            <h1>La leche materna apoya el desarrollo cerebral de tu bebe</h1>
+            <p>
+                Tu cuerpo produce leche materna de una forma unica y pensada para las necesidades
+                de tu bebe. Le aporta proteinas, energia y nutrientes esenciales para crecer,
+                aprender y desarrollarse con salud.
+            </p>
+            <div class="resumen-lactancia" aria-label="Resumen de beneficios">
+                <span>Nutricion</span>
+                <span>Defensas</span>
+                <span>Conexion</span>
+            </div>
+        </div>
+        <img class="imagen-lactancia" src="https://i.pinimg.com/1200x/6d/2f/18/6d2f186e39bff084f39dea43390c40fb.jpg" alt="Bebe en brazos">
+    </section>
 
-<p>
-La proteína es un componente fundamental para su crecimiento, desarrollo y salud general. De hecho, es uno de los elementos más abundantes en su cuerpo. Proporciona los aminoácidos necesarios para la formación de sus músculos, órganos y un sistema inmunitario saludable. Desde el nacimiento, una nutrición adecuada es clave, y las proteínas son vitales para el correcto funcionamiento del cerebro, el órgano que no solo le permite aprender, sino que también le indica al cuerpo cómo moverse, respirar, hablar e incluso cómo debe latir el corazón.
-</p>
-<br>
+    <section class="bloque-lactancia">
+        <h2 class="titulo-seccion">Por que las proteinas son importantes</h2>
+        <div class="grid-dos">
+            <div>
+                <p>
+                    La proteina es fundamental para el crecimiento, el desarrollo y la salud general.
+                    Aporta aminoacidos que ayudan a formar musculos, organos y un sistema inmunitario
+                    saludable.
+                </p>
+                <p>
+                    Tambien es importante para el cerebro, el organo que permite aprender y coordina
+                    funciones como moverse, respirar, hablar y mantener el latido del corazon.
+                </p>
+            </div>
+            <div class="nota-lactancia">
+                <p>
+                    Aunque los bebes nacen con todas las neuronas que tendran, esas neuronas necesitan
+                    conectarse. Las proteinas participan en la formacion y mantenimiento de los
+                    neurotransmisores que ayudan a crear esas conexiones.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<p>
-Aunque los bebés nacen con todas las neuronas que van a tener durante toda su vida, estas necesitan conectarse a través de neurotransmisores. Cada vez que tu pequeño es expuesto a nuevos estímulos (como oír su nombre, tocar diferentes texturas y observar los colores), éstas se conectan entre sí. ¡Y adivina qué! Las proteínas son esenciales para formar estos neurotransmisores y mantenerlos en buen estado.
-</p>
-</div>
-</section>
+    <section class="bloque-lactancia">
+        <h2 class="titulo-seccion">Que pasa si no consume suficiente proteina</h2>
+        <p class="subtitulo-lactancia">
+            La malnutricion proteica en los primeros meses puede afectar el desarrollo intelectual,
+            el comportamiento, la memoria verbal y el reconocimiento visual.
+        </p>
+        <div class="nota-lactancia">
+            <p>
+                La buena noticia es que la leche materna esta disenada para brindar una mezcla adecuada
+                de proteinas y nutrientes que ayudan al cerebro de tu bebe a crecer y desarrollarse.
+            </p>
+        </div>
+    </section>
 
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">
-        
-<div class="lista-tarjetas-etapas">
+    <section class="bloque-lactancia">
+        <h2 class="titulo-seccion">Senales de que tu bebe esta bien alimentado</h2>
+        <p class="subtitulo-lactancia">
+            Como no puedes ver exactamente cuanta leche toma, estas senales pueden ayudarte a reconocer
+            si esta recibiendo suficiente alimento.
+        </p>
+        <div class="grid-dos">
+            <ul class="lista-cuidada">
+                <li>Las sesiones de alimentacion son comodas para ambos.</li>
+                <li>Tu bebe come con entusiasmo, pero de manera calmada.</li>
+                <li>Despues de comer, sus brazos y manos se ven mas relajados.</li>
+                <li>Traga con eficacia y respira bien mientras esta cerca del pecho.</li>
+            </ul>
+            <ul class="lista-cuidada">
+                <li>Tus senos se sienten mas suaves y menos llenos despues de amamantar.</li>
+                <li>Su aumento de peso se mantiene dentro de lo esperado por su profesional de salud.</li>
+                <li>Moja panales con regularidad durante el dia.</li>
+                <li>Se ve alerta y tranquilo despues de alimentarse.</li>
+            </ul>
+        </div>
+    </section>
 
-<div class="tarjeta-etapa-individual">
-<h2>¿Qué pasa si mi bebé no consume suficiente proteína?</h2>
-<p>La malnutrición proteica en los primeros meses de vida puede afectar el coeficiente intelectual, el comportamiento, la memoria verbal y de reconocimiento visual. Afortunadamente, la leche materna está diseñada para brindarle a tu bebé la mezcla perfecta de proteínas que su cerebro necesita para crecer sano y desarrollarse adecuadamente.
-</p>
-</div>
+    <section class="bloque-lactancia">
+        <h2 class="titulo-seccion">Conteo de panales sucios</h2>
+        <div class="grid-tres">
+            <article class="tarjeta-lactancia">
+                <h3>Primeras 48 horas</h3>
+                <p>
+                    Las primeras heces suelen ser oscuras y pegajosas, llamadas meconio. Es comun ver
+                    una evacuacion el primer dia y dos al dia siguiente.
+                </p>
+            </article>
+            <article class="tarjeta-lactancia">
+                <h3>Desde el tercer dia</h3>
+                <p>
+                    Probablemente tendras que cambiar tres panales sucios o mas al dia, aunque cada
+                    bebe puede tener su propio ritmo.
+                </p>
+            </article>
+            <article class="tarjeta-lactancia">
+                <h3>Primeras 4 a 6 semanas</h3>
+                <p>
+                    Tres o mas evacuaciones amarillas y grumosas al dia suelen ser una buena senal
+                    de que esta recibiendo leche.
+                </p>
+            </article>
+        </div>
+    </section>
 
+    <section class="bloque-lactancia">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Como hacer eructar a tu bebe</h2>
+                <p>
+                    Es posible que tu bebe trague aire al amamantar si se suelta y vuelve a agarrarse
+                    al pecho, o si estaba llorando antes de alimentarse.
+                </p>
+                <p>
+                    Deja que se alimente hasta que suelte el seno y despues ofrecele la oportunidad
+                    de eructar. No te alarmes si no lo hace: muchos bebes amamantados tragan menos
+                    aire y necesitan eructar con menor frecuencia.
+                </p>
+            </div>
+            <article class="tarjeta-lactancia">
+                <h3>Tip practico</h3>
+                <p>
+                    Mantenlo en posicion vertical unos minutos despues de comer y observa si se relaja,
+                    se acomoda o libera aire por si solo.
+                </p>
+            </article>
+        </div>
+    </section>
 
-<div class="tarjeta-etapa-individual">
-<h3>Señales de que tu bebé está bien alimentado</h3>
-<p>
-Al no poder ver la cantidad exacta de leche que tu bebé está tomando, es natural preguntarse si está comiendo lo suficiente. ¡La buena noticia es que hay señales claras que te ayudarán a saber que está recibiendo toda la nutrición que necesita!:
-</p>
+    <section class="bloque-lactancia">
+        <h2 class="titulo-seccion">Como conservar tu energia al amamantar</h2>
+        <div class="grid-cuatro">
+            <article class="tarjeta-lactancia">
+                <h3>Come suficiente</h3>
+                <p>
+                    La produccion de leche requiere energia adicional. Elige alimentos ricos en
+                    nutrientes y escucha las senales de hambre de tu cuerpo.
+                </p>
+            </article>
+            <article class="tarjeta-lactancia">
+                <h3>Hidratate</h3>
+                <p>
+                    Tomar liquidos con frecuencia puede ayudarte a sentirte mejor y acompanar una
+                    buena produccion de leche.
+                </p>
+            </article>
+            <article class="tarjeta-lactancia">
+                <h3>Descansa</h3>
+                <p>
+                    Cuando sea posible, busca pausas cortas. El descanso tambien forma parte del
+                    cuidado durante la lactancia.
+                </p>
+            </article>
+            <article class="tarjeta-lactancia">
+                <h3>Pide apoyo</h3>
+                <p>
+                    Consulta a tu profesional de salud o asesora de lactancia si tienes dolor,
+                    dudas o notas cambios que te preocupan.
+                </p>
+            </article>
+        </div>
+    </section>
 
-<p>❤︎Las sesiones de alimentación son cómodas para ambos.</p>
-<p>❤︎Tu bebé come con entusiasmo, pero de manera calmada.</p>
-<p>❤︎Después de comer, los brazos y manos de tu bebé están más relajados.</p>
-<p>❤︎Tu bebé traga con eficacia y su nariz está cerca de tu pecho, pero respira bien.</p>
-<p>❤︎Tus senos se sentirán más suaves y menos llenos después de amamantar.</p>
-<p>❤︎El aumento de peso de tu bebé es de al menos 0.03 a 0.04 kg diarios durante los primeros tres meses.</p>
-</div>
+    <section class="nota-lactancia">
+        <p>
+            La lactancia materna es un viaje natural y personal. Cada gota cuenta para el crecimiento
+            y bienestar de tu bebe, pero tambien importa que tu te sientas acompanada, escuchada y
+            cuidada durante esta etapa.
+        </p>
+    </section>
 
-
-<div class="tarjeta-etapa-individual">
-<h3>Conteo de pañales sucios</h3>
-<p>La leche materna tiene propiedades naturales que ayudan a producir heces con regularidad. Por eso, un buen indicador del consumo de leche es el número de pañales sucios:
-</p>
-
-<p>❤︎Primeras 48 horas: Heces alquitranadas (meconio). Lo normal es una defecación en las primeras 24 horas y dos al día siguiente.</p>
-<p>❤︎Tercer día en adelante: Probablemente tendrás que cambiar tres pañales sucios o más al día.</p>
-<p>❤︎Primeras 4 a 6 semanas: Tres o más defecaciones amarillas grumosas todos los días son una buena señal.
-</p>
-</div>
-
-
-<div class="tarjeta-etapa-individual">
-<h3>Cómo hacer eructar a tu bebé después de amamantar</h3>
-<p>
-Es posible que tu bebé trague aire al amamantar si se suelta y se vuelve a agarrar al pecho, o si está llorando. Deja que se alimente hasta que suelte el seno y ofrécele la oportunidad de eructar. No te alarmes si no lo hace; los bebés amamantados a menudo tienen menos necesidad de eructar, ya que tragan menos aire.
-</p>
-</div>
-</div>
-</div>
-</section>
-
-
-
-
-<section class="hero">
-<div class="hero-image">
-<img src="https://i.pinimg.com/1200x/6d/2f/18/6d2f186e39bff084f39dea43390c40fb.jpg" alt="Bebé en Brazos">
-</div>
-
-<div class="hero-text">
-<center>
-<h2>
-Cómo conservar tu energía al amamantar
-</h2>
-<p>
-La producción de leche materna requiere energía adicional. Necesitarás aproximadamente 500 calorías extra al día. Usa esas calorías sabiamente, eligiendo alimentos ricos en nutrientes. 
-</p>
-
-<p>Una alimentación adecuada y abundante ingesta de líquidos pueden ayudarte a mantener una buena producción de leche. Consulta siempre con tu profesional de la salud para resolver dudas y asegurar una lactancia exitosa.</p>
-
-<p>
-La lactancia materna es un viaje natural y fascinante, mucho más que solo alimentar a tu bebé. Es el mejor comienzo posible para tu pequeño, ya que se adapta perfectamente a sus necesidades cambiantes. Al entender cómo funciona tu cuerpo y las señales de tu bebé, podrás disfrutar plenamente de esta etapa única. Recuerda que cada gota cuenta para el crecimiento y bienestar de tu pequeño, y no dudes en hablar siempre con tu profesional de la salud para resolver cualquier consulta que tengas.
-</p>
-</div>
-</center>
-</section>
-</header>
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="Lactancia.html" class="btn btn-primary">ANTERIOR</a>
-</div>
-</center>
-
-<br><br>
-
-
+    <div class="acciones-lactancia">
+        <a href="Lactancia.html" class="btn btn-primary">ANTERIOR</a>
+    </div>
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
-
-
-
-
 </body>
 </html>
 

@@ -3,198 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicamentos - MomMiel</title>
+    <title>Medicamentos durante el embarazo - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-medicamentos {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-medicamentos,
+        .pagina-medicamentos * {
+            box-sizing: border-box;
+        }
+
+        .hero-medicamentos,
+        .bloque-medicamentos,
+        .tarjeta-medicamentos,
+        .nota-medicamentos,
+        .imagen-medicamentos {
+            border-radius: 24px;
+        }
+
+        .hero-medicamentos {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #fff8f6 0%, #ffffff 50%, #eef4f3 100%);
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-medicamentos h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.08;
+            text-align: left;
+        }
+
+        .pagina-medicamentos p,
+        .pagina-medicamentos li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-medicamentos {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .imagen-medicamentos {
+            width: 100%;
+            min-height: 330px;
+            max-height: 470px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .bloque-medicamentos {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-medicamentos {
+            max-width: 840px;
+            margin: 0 0 24px;
+        }
+
+        .grid-dos,
+        .grid-tres {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .tarjeta-medicamentos {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-medicamentos h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .tarjeta-medicamentos p:last-child,
+        .bloque-medicamentos p:last-child,
+        .nota-medicamentos p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .lista-alerta li::before {
+            content: "!";
+            display: inline-grid;
+            place-items: center;
+            width: 18px;
+            height: 18px;
+            top: 5px;
+            border-radius: 50%;
+            background: #B88B8B;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .nota-medicamentos {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .resumen-medicamentos {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .resumen-medicamentos span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .78);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .acciones-medicamentos {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-medicamentos,
+            .grid-dos,
+            .grid-tres,
+            .resumen-medicamentos {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-medicamentos,
+            .bloque-medicamentos {
+                padding: 24px;
+            }
+
+            .imagen-medicamentos {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">Medicamentos durante el embarazo</h2>
-</div>
+<main class="caja-unica pagina-medicamentos">
+    <section class="hero-medicamentos">
+        <div>
+            <span class="badge-medicamentos">Cuidado prenatal</span>
+            <h1>Medicamentos durante el embarazo</h1>
+            <p>
+                Durante el embarazo puede ser dificil saber que medicamentos son seguros.
+                Algunos se han usado durante anos y otros requieren mas cuidado, por eso siempre
+                es importante consultar con tu medico o partera antes de tomar, suspender o cambiar
+                cualquier tratamiento.
+            </p>
+            <div class="resumen-medicamentos" aria-label="Resumen de decisiones">
+                <span>Consultar</span>
+                <span>No automedicarse</span>
+                <span>Dar seguimiento</span>
+            </div>
+        </div>
+        <img class="imagen-medicamentos" src="https://i.pinimg.com/736x/e6/2a/e4/e62ae45abf6fe9032fd12d604373f7f9.jpg" alt="Medicamentos y cuidado durante el embarazo">
+    </section>
 
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/e6/2a/e4/e62ae45abf6fe9032fd12d604373f7f9.jpg" alt="Mediciona">
+    <section class="nota-medicamentos">
+        <p>
+            Esta informacion es una guia general y no sustituye una consulta medica. Habla con tu
+            profesional de salud sobre cualquier medicamento, vitamina, suplemento o remedio que uses,
+            incluso si es de venta libre.
+        </p>
+    </section>
 
-</div>
-</div>
-</div>
-</section>
+    <section class="bloque-medicamentos">
+        <h2 class="titulo-seccion">Medicamentos que suelen considerarse seguros</h2>
+        <p class="subtitulo-medicamentos">
+            La mayoria de los medicamentos no se investigan directamente en personas embarazadas.
+            Aun asi, algunos se han usado durante suficiente tiempo como para que los profesionales
+            tengan una idea mas clara de su seguridad.
+        </p>
+        <div class="grid-dos">
+            <article class="tarjeta-medicamentos">
+                <h3>Con receta</h3>
+                <ul class="lista-cuidada">
+                    <li>Algunos medicamentos para la presion arterial alta.</li>
+                    <li>La mayoria de los medicamentos para el asma.</li>
+                    <li>Algunos medicamentos para la depresion.</li>
+                    <li>Penicilina y algunos otros antibioticos.</li>
+                    <li>Medicamentos para el VIH.</li>
+                </ul>
+            </article>
+            <article class="tarjeta-medicamentos">
+                <h3>De venta libre</h3>
+                <ul class="lista-cuidada">
+                    <li>Acetaminofen para fiebre o dolor, si tu medico lo autoriza.</li>
+                    <li>Algunos medicamentos para alergia, como loratadina o difenhidramina.</li>
+                    <li>Algunos medicamentos de venta libre para resfriados.</li>
+                    <li>Algunos antiacidos, como Maalox, Mylanta, Rolaids o Tums.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
 
+    <section class="bloque-medicamentos">
+        <h2 class="titulo-seccion">Como decidir durante el embarazo</h2>
+        <div class="grid-dos">
+            <div>
+                <p>
+                    En general, los medicos recomiendan evitar medicamentos cuando sea posible,
+                    especialmente durante los primeros tres meses, ya que en este periodo se forman
+                    los organos del feto.
+                </p>
+                <p>
+                    Pero si tienes una condicion como presion arterial alta, asma, epilepsia,
+                    depresion u otro problema de salud, suspender el tratamiento por tu cuenta puede
+                    ser riesgoso.
+                </p>
+            </div>
+            <div class="nota-medicamentos">
+                <p>
+                    Tu medico o partera puede comparar los riesgos de tomar el medicamento con los
+                    riesgos de no tratar la enfermedad. A veces se mantiene el tratamiento actual y
+                    otras veces se cambia por una opcion mas adecuada para el embarazo.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
+    <section class="bloque-medicamentos">
+        <h2 class="titulo-seccion">Medicamentos que deben evitarse o revisarse con urgencia</h2>
+        <p class="subtitulo-medicamentos">
+            Algunos medicamentos se han relacionado con mayor probabilidad de anomalas congenitas
+            u otros problemas. No los suspendas sin indicacion si los necesitas para una enfermedad:
+            consulta para elegir la opcion mas segura.
+        </p>
+        <div class="grid-tres">
+            <article class="tarjeta-medicamentos">
+                <h3>Riesgo alto conocido</h3>
+                <ul class="lista-cuidada lista-alerta">
+                    <li>Isotretinoina para el acne.</li>
+                    <li>Metotrexato, usado en algunas enfermedades inflamatorias.</li>
+                    <li>Warfarina, usada para prevenir coagulos.</li>
+                </ul>
+            </article>
+            <article class="tarjeta-medicamentos">
+                <h3>Requieren evaluacion</h3>
+                <ul class="lista-cuidada lista-alerta">
+                    <li>Inhibidores de la ECA, como benazepril o lisinopril.</li>
+                    <li>Algunos medicamentos para controlar convulsiones, como acido valproico.</li>
+                    <li>Litio, usado para depresion bipolar.</li>
+                </ul>
+            </article>
+            <article class="tarjeta-medicamentos">
+                <h3>Ansiedad y sedantes</h3>
+                <ul class="lista-cuidada lista-alerta">
+                    <li>Alprazolam, como Xanax.</li>
+                    <li>Diazepam, como Valium.</li>
+                    <li>Otros medicamentos similares para la ansiedad.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
 
-<div class="tarjeta-etapa-individual">
-<p>
-Puede ser difícil saber si un medicamento es seguro durante el embarazo. La mayoría de los medicamentos no se investigan en personas embarazadas. Esto se debe a que los investigadores se preocupan acerca de cómo los medicamentos podrían afectar al bebé. Pero algunos medicamentos han sido tomados durante tanto tiempo por tantas personas durante el embarazo que los médicos tienen una idea clara de lo seguros que son.
-</p>
+    <section class="bloque-medicamentos">
+        <h2 class="titulo-seccion">Acido folico</h2>
+        <div class="grid-dos">
+            <div>
+                <p>
+                    El acido folico es una vitamina B. Tomarlo antes y durante los primeros meses del
+                    embarazo ayuda a reducir el riesgo de defectos del tubo neural y otros defectos
+                    de nacimiento.
+                </p>
+                <ul class="lista-cuidada">
+                    <li>Durante la edad fertil suele recomendarse entre 0.4 mg y 0.8 mg al dia.</li>
+                    <li>En embarazo multiple, puede recomendarse 1 mg al dia.</li>
+                    <li>En algunos antecedentes o tratamientos, el medico puede indicar dosis mayores.</li>
+                </ul>
+            </div>
+            <div class="nota-medicamentos">
+                <p>
+                    Si necesitas acido folico adicional, trabajalo con tu medico. No intentes subir
+                    la dosis tomando mas multivitaminicos, porque podrias consumir demasiada cantidad
+                    de otras sustancias.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<p> En general, los médicos dicen que suele ser seguro tomar lo siguiente: </p>
-<p><strong>Medicamentos de venta con receta</p></strong>
+    <section class="bloque-medicamentos">
+        <h2 class="titulo-seccion">Antes de tomar algo, revisa esto</h2>
+        <div class="grid-tres">
+            <article class="tarjeta-medicamentos">
+                <h3>Nombre y dosis</h3>
+                <p>
+                    Ten a la mano el nombre del medicamento, la dosis, cada cuanto lo tomas y desde
+                    cuando lo usas.
+                </p>
+            </article>
+            <article class="tarjeta-medicamentos">
+                <h3>Motivo</h3>
+                <p>
+                    Explica para que lo necesitas y que sintomas o enfermedad trata. Esto ayuda a
+                    evaluar riesgos y beneficios.
+                </p>
+            </article>
+            <article class="tarjeta-medicamentos">
+                <h3>Suplementos</h3>
+                <p>
+                    Incluye vitaminas, hierbas, tes, remedios caseros y productos naturales. Tambien
+                    pueden tener efectos durante el embarazo.
+                </p>
+            </article>
+        </div>
+    </section>
 
-<p>❤︎︎Algunos medicamentos para la presión arterial alta</p>
-<p>❤︎︎La mayoría de los medicamentos para el asma</p>
-<p>❤︎︎Algunos medicamentos para la depresión </p>
-<p>❤︎︎Penicilina y algunos otros antibióticos </p>
-<p>❤︎︎Medicamentos para el VIH </p>
-
-<p><strong> Medicamentos de venta libre </p></strong>
-<p>❤︎︎Acetaminofén (como Tylenol) para la fiebre y el dolor </p>
-<p>❤︎︎Algunos medicamentos para la alergia, entre los que se incluyen la loratadina (como Alavert y Claritin) y la difenhidramina (como Benadryl) </p>
-<p>❤︎︎Algunos medicamentos de venta libre para los resfriados </p>
-<p>❤︎︎Algunos antiácidos. Maalox, Mylanta, Rolaids y Tums son opciones seguras. No tome antiácidos que tengan bicarbonato sódico, trisilicato de magnesio o aspirina. </p>
-
-<p>
-Hable con el médico o la partera acerca de cualquier medicamento que tome. Estos incluyen medicamentos de venta libre, vitaminas y suplementos.
-</p>
-</div>
-</div>
-</div>
-</seccion>
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-
-<p><strong>Cómo decidir sobre los medicamentos durante el embarazo</strong></p>
-<p>
-Los médicos generalmente recomiendan evitar medicamentos durante el embarazo, si es posible, especialmente durante los primeros 3 meses. Este es el período en el que se forman los órganos del feto.
-</p>
-
-<p> 
-Pero, ¿qué sucede si toma medicamentos para un problema de salud, como presión arterial alta o asma? El médico o la partera examinará los riesgos. Un medicamento puede tener riesgos, pero no tratar su enfermedad también podría ser peligroso. Si los problemas empeoraran sin tratamiento, entonces el médico o la partera pueden hacer que siga tomando su medicamento actual o cambiarle a otro. Algunos medicamentos que no son seguros en el primer trimestre pueden ser seguros de tomar más adelante en el embarazo.
-</p>
-</div>
-</div>
-</div>
-</seccion>
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-
-<p><strong>Medicamentos que debe evitar durante el embarazo</strong></p>
-<p>
-Se sabe que algunos medicamentos aumentan la probabilidad de tener anomalías congénitas u otros problemas. Pero a veces hay más riesgo para usted y el bebé si deja de tomar un medicamento (como uno que controla convulsiones) que si lo sigue tomando. Usted puede colaborar con el médico o la partera para hacer las elecciones más seguras sobre medicamentos.
-</p>
-
-<p><strong>Algunos medicamentos que aumentan el riesgo de anomalías congénitas son:</p></strong>
-
-<p>❤︎︎El medicamento para el acné isotretinoína. Este medicamento muy probablemente cause anomalías congénitas. No debe tomarse si está embarazada o puede quedar embarazada.</p>
-
-<p>❤︎︎Los inhibidores de la enzima convertidora de la angiotensina (ECA), como benazepril y lisinopril. Estos medicamentos se usan para tratar la presión arterial alta y algunas afecciones cardíacas.</p>
-
-<p>❤︎︎Algunos medicamentos para controlar las convulsiones, como el ácido valproico.</p>
-
-<p>❤︎︎El metotrexato. Se usa a veces para tratar la artritis. </p>
-<p>❤︎︎La warfarina. Ayuda a prevenir los coágulos de sangre. </p>
-<p>❤︎︎El litio. Se usa para tratar la depresión bipolar. </p>
-<p>❤︎︎El alprazolam (como Xanax), el diazepam (como Valium) y algunos otros medicamentos que se usan para tratar la ansiedad. </p>
-
-
-</div>
-</div>
-</div>
-</seccion>
-
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-
-<p><strong>Ácido fólico</strong></p>
-<p>
-Ácido fólico es una vitamina B. Tomarlo antes y durante los primeros meses del embarazo reduce el riesgo de que su bebé tenga un defecto del tubo neural u otros defectos de nacimiento.
-</p>
-
-<p>❤︎︎Durante la edad fértil, usted debe obtener 0.4 mg (400 mcg) a 0.8 mg (800 mcg) de ácido fólico. Puede obtenerlo de alimentos fortificados (como cereales) y suplementos.</p>
-
-<p>❤︎︎Si está embarazada de gemelos o más, debe obtener 1 mg (1000 mcg) de ácido fólico al día.</p>
-
-<p>
-Es posible que necesite aún más ácido fólico si tiene antecedentes familiares de defectos del tubo neural, tuvo un bebé con este defecto o toma medicamentos para las convulsiones. Los expertos recomiendan 4 mg (4000 mcg) de ácido fólico al día.
-</p>
-
-<p>
-<strong>
-Si necesita ácido fólico adicional, trabaje con el médico. No intente hacerlo por su cuenta tomando más multivitamínicos. Podría consumir demasiada cantidad de las otras sustancias que contiene el multivitamínico.
-</strong>
-</p>
-
-</div>
-</div>
-</div>
-</seccion>
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="blog.html" class="btn btn-primary">SALIR</a>
-</div>
-</center>
-
-<br><br>
-
-
+    <div class="acciones-medicamentos">
+        <a href="blog.html" class="btn btn-primary">SALIR</a>
+    </div>
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
-
-
-
-
 </body>
 </html>
 

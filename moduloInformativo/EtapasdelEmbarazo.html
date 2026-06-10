@@ -3,404 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recomendaciones - MomMiel</title>
+    <title>Etapas del embarazo - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-parto {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-parto,
+        .pagina-parto * {
+            box-sizing: border-box;
+        }
+
+        .pagina-parto .hero-parto,
+        .pagina-parto .bloque-parto,
+        .pagina-parto .tarjeta-parto,
+        .pagina-parto .nota-parto,
+        .pagina-parto .imagen-parto {
+            border-radius: 24px;
+        }
+
+        .hero-parto {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+            gap: 34px;
+            align-items: center;
+            background: linear-gradient(135deg, #fff7f8 0%, #fff 52%, #f8eee9 100%);
+            padding: 34px;
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-parto h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 56px);
+            line-height: 1.05;
+        }
+
+        .hero-parto p,
+        .pagina-parto p,
+        .pagina-parto li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-parto {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .hero-resumen {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .hero-resumen span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .72);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .imagen-parto {
+            width: 100%;
+            min-height: 320px;
+            max-height: 460px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-parto {
+            max-width: 760px;
+            margin: 0 0 24px;
+        }
+
+        .bloque-parto {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .grid-etapas,
+        .grid-tres,
+        .grid-dos {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-etapas {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+        }
+
+        .tarjeta-parto {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-parto h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .tarjeta-parto p:last-child,
+        .bloque-parto p:last-child {
+            margin-bottom: 0;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .nota-parto {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .galeria-parto {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .galeria-parto img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(105, 82, 75, .12);
+        }
+
+        .acciones-parto {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-parto,
+            .grid-dos,
+            .grid-etapas,
+            .grid-tres,
+            .galeria-parto {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-parto,
+            .bloque-parto {
+                padding: 24px;
+            }
+
+            .hero-resumen {
+                grid-template-columns: 1fr;
+            }
+
+            .imagen-parto,
+            .galeria-parto img {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-
-
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo"> Etapas del trabajo de parto y del parto: </h2>
-</div>
-
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/0c/c8/9a/0cc89a50c0236797250ce9d3aaeb9034.jpg" alt="Pies">
-
-</div>
-</div>
-</div>
-</section>
-
-
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">Etapa 1: Inicio del trabajo de parto y trabajo de parto activo</h2>
-<p> La primera etapa del trabajo de parto y el nacimiento ocurre cuando empieza a sentir contracciones persistentes. Estas se hacen más intensas y comienzan a ser más frecuentes a medida que pasa el tiempo, Son las que hacen que se abra el cuello del útero, lo que se llama dilatación. Las contracciones también hacen que el cuello del útero se ablande, se acorte y se afine. Este proceso se conoce como borramiento. Es lo que permite que el bebé se mueva hacia el canal de parto.
-
-La primera etapa del trabajo de parto es la más larga de las tres. Se divide en dos fases: el inicio del trabajo de parto y el trabajo de parto activo. </p>
-</div>
-
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/1200x/7b/38/df/7b38dfb0a446a91e04bcaf898e17aa33.jpg" alt="Parto">
-
-</div>
-</div>
-</div>
-</section>
-
-
-<section class="galeria-tres-columnas">
-<div class="container">  
-<h2 class="titulo-articulo">Inicio del trabajo de parto</h2>
-
-<div class="galeria-grid">
-<div class="galeria-item">
-<div class="galeria-info">
-<p> 
-Durante esta etapa, también conocida como trabajo de parto latente, el cuello del útero se abre y se ablanda. También se acorta y se afina. En el inicio del trabajo de parto, el cuello del útero se abre menos de 2,6 pulgadas (6 centímetros). Las contracciones suelen ser leves y puede que no ocurran de manera constante.
-
-A medida que el cuello del útero comienza a abrirse, podría notar una secreción de color rosa claro o con un poco de sangre que sale de la vagina. Esto es probablemente el tapón mucoso que bloquea la abertura del cuello del útero durante el embarazo.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/67/29/0c/67290cd1eda48d857404e94eabafb79d.jpg" alt="Parto2">
-</div>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-<strong>Cuánto tiempo dura:</strong>  El inicio del trabajo de parto no es predecible. Puede frenarse y volver a empezar. La duración promedio varía de horas a días. Por lo general, es más corto en quienes ya tuvieron un bebé antes.
-</p>
-
-<p>
-<strong>Qué puede hacer:</strong>  Para muchas personas, el inicio del trabajo de parto no es particularmente incómodo. Sin embargo, para otras, las contracciones pueden ser más intensas y, muchas veces, pueden continuar por un largo período durante el inicio del trabajo de parto. Trate de mantenerse relajada.
-</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">   
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-<p>
-Las siguientes recomendaciones pueden hacer que se sienta más cómoda durante el inicio del trabajo de parto:
-</p>
-
-<p>❤︎︎Dé un paseo.</p>
-<p>❤︎︎Tome una ducha o un baño.</p>
-<p>❤︎︎Escuche música relajante.</p>
-<p>❤︎︎Pruebe las técnicas de respiración o relajación que le enseñaron en la clase de preparación para el parto.</p>
-<p>❤︎︎Cambie de posición.</p>
-
-<p>
-Si no tiene un embarazo de alto riesgo, posiblemente pase la mayor parte del inicio del trabajo de parto en casa. La mayoría de las veces, las personas embarazadas no necesitan ir al hospital ni al centro de maternidad hasta que las contracciones empiezan a ser más intensas y más seguidas. Consulte al profesional de atención médica sobre cuándo debe ir al hospital o al centro de maternidad. Si se rompe la fuente o tiene mucho sangrado vaginal, comuníquese con el profesional de atención médica de inmediato.
-</p>
-</div>
-</div>
-</div>
-</seccion>
-<br>
-
-
-
-
-<section class="galeria-tres-columnas">
-<div class="container">  
-<h2 class="titulo-articulo">Trabajo de parto activo</h2>
-
-<div class="galeria-grid">
-<div class="galeria-item">
-<div class="galeria-info">
-<p> 
-Durante el trabajo de parto activo, el cuello del útero se abre de 2,36 pulgadas a 4 pulgadas (de 6 cm a 10 cm). Las contracciones son más intensas y seguidas. También empiezan a ocurrir de manera más constante. Es posible que se le acalambren las piernas y que tenga malestar estomacal. Si es que ya no sucedió, podría sentir la ruptura de la fuente. También puede sentir presión en la espalda. Si aún no se ha dirigido al lugar donde dará a luz, este es el momento.
-</p>
-
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/8d/d5/35/8dd5350225ec87fdb75a483d90009dc9.jpg" alt="Parto5">
-</div>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-El entusiasmo que se tiene al principio puede desaparecer a medida que avanza el trabajo de parto y empieza a aumentar la incomodidad. Pida analgésicos o anestesia si lo desea.
-</p>
-
-<p>
-El equipo de atención médica colaborará con usted para tomar la mejor decisión para usted y su bebé. Recuerde que es la única que puede juzgar su necesidad de aliviar el dolor.
-</p>
-</div>
-</div>
-
-
-
-
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/236x/5b/68/48/5b6848628890c2ce7f4bfda1e0625578.jpg" alt="Parto3">
-</div>
-</div>
-</div>
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p> 
-<strong>Cuánto tiempo dura</strong>: El trabajo de parto activo suele durar de 4 a 8 horas o más. En promedio, el cuello del útero se dilata aproximadamente 0,4 pulgadas (1 centímetro) por hora. Sin embargo, podría demorar más tiempo si se trata del primer bebé.
-</p>
-
-<p>
-<strong>Qué puede hacer:</strong> Busque el aliento y el apoyo de su acompañante de parto y del equipo de atención médica. Pruebe técnicas de respiración y relajación para aliviar el dolor. Use lo que aprendió en la clase de preparación para el parto o pida sugerencias al equipo de atención médica.
-</p>
-
-</div>
-</div>
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/02/ab/dd/02abddb5070bd60cbd07116df4d919d9.jpg" alt="Parto4">
-</div>
-</div>
-</div>
-
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p> 
-A menos que necesite estar en una posición específica para que puedan controlarlos a usted y al bebé, pruebe lo siguiente para estar más cómoda durante el trabajo de parto activo:
-</p>
-
-<p>❤︎︎Cambie de posición.</p>
-<p>❤︎︎Ruede sobre una pelota de goma grande, conocida como pelota de parto.</p>
-<p>❤︎︎Tome una ducha o un baño con agua tibia.</p>
-<p>❤︎︎Camine y haga descansos para respirar durante las contracciones.</p>
-<p>❤︎︎Pida que le hagan un masaje suave entre contracciones.</p>
-
-<p>
-Si necesita tener un parto por cesárea, tener comida en el estómago puede derivar en complicaciones. Si el profesional de atención médica cree que podría necesitar una cesárea, o si le inyectan la anestesia epidural para aliviar el dolor, solo podrá tomar pequeñas cantidades de líquidos claros, como agua, trocitos de hielo, paletas de helado y jugo, en lugar de alimentos sólidos.
-</p>
-</div>
-</div>
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-La última parte del trabajo de parto activo puede ser particularmente intensa y dolorosa. Las contracciones son más seguidas y pueden durar de 60 a 90 segundos. Puede que sienta presión en la parte baja de la espalda y en el recto. Informe a un miembro del equipo de atención médica si tiene la necesidad de pujar.
-</p>
-
-<p>
-Si desea pujar, pero el cuello del útero no está completamente abierto, es probable que tenga que esperar. Pujar demasiado pronto podría cansarla y hacer que se hinche el cuello del útero. Esto podría generar un retraso en el parto. Jadee o sople durante las contracciones. Esta parte del trabajo de parto, generalmente, es breve y dura entre 15 y 60 minutos.
-</p>
-</div>
-</div>
-
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<h3 class="titulo-articulo">Borramiento y dilatación del cuello del útero</h3>
-<p>
-Durante la primera etapa del trabajo de parto, el cuello del útero se expande (se dilata) y se afina (borramiento) para permitir que el bebé se mueva hacia el canal de parto. En las figuras A y B, el cuello del útero está estrechamente cerrado. En la figura C, el borramiento del cuello del útero es del 60 % y la dilatación, de 1 a 2 cm. En la figura D, el borramiento del cuello del útero es del 90 % y la dilatación, de 4 a 5 cm. El borramiento del cuello del útero debe ser del 100 % y la dilatación debe ser de 10 cm antes del parto vaginal.
-</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">Etapa 2: El nacimiento de su bebé</h2>
-
-<p> Ya es la hora Dará a luz a su bebé durante la segunda etapa del trabajo de parto. </p>
-</div>
-
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/1200x/27/ef/c6/27efc6476acf69ebd931b8cc3a42d56e.jpg" alt="Parto10">
-
-</div>
-</div>
-</div>
-</section>
-
-
-
-<section class="seccion-destacada">
-<div class="tarjeta-ancha">
-        
-<p>
-<strong>Cuánto tiempo dura:</strong> Traer a su bebé al mundo puede tomar de unos pocos minutos a unas pocas horas. Las personas que tienen un bebé por primera vez y a quienes les administraron anestesia epidural, por lo general, tienen que pujar más tiempo en comparación con aquellas que ya tuvieron un bebé o que no recibieron esta anestesia.
-</p>     
-<br> <br>      
-<p>
-<strong>Qué puede hacer:</strong> 
-¡Puje! El profesional de atención médica le pedirá que haga fuerza hacia abajo durante cada contracción o le indicará cuándo pujar. O bien le puede pedir que puje cuando sienta la necesidad de hacerlo.
-</p>
-
-<p>
-Cuando llegue el momento de pujar, puede probar diferentes posiciones hasta que encuentre una con la que se sienta mejor. Puede pujar mientras esté en cuclillas, sentada o arrodillada, incluso sobre las manos y las rodillas. Un miembro del equipo de atención médica puede verificar el progreso a medida que puja para avisarle si el esfuerzo está funcionando.
-</p>
-
-<p>
-En algún momento, es posible que le pidan que puje con más suavidad o que no puje en absoluto. Esto les da a sus tejidos vaginales tiempo para estirarse en lugar de desgarrarse. Para mantenerse motivada, puede preguntar si le permiten tocar la cabeza del bebé entre sus piernas o verla en un espejo.
-</p>
-
-<p>
-Luego de que sale la cabeza del bebé, salen los hombros y, a continuación, el resto del cuerpo. Si es necesario, se despejan las vías respiratorias del bebé. Si en el parto usted o su bebé no tuvieron complicaciones de salud, el profesional de atención médica suele esperar unos segundos o minutos antes de cortar el cordón umbilical. Retrasar el pinzamiento y el corte del cordón umbilical después del parto aumenta el flujo de sangre rica en nutrientes desde el cordón y la placenta hasta el bebé. Esto aumenta la reserva de hierro del bebé y disminuye el riesgo de anemia, lo que contribuye a un desarrollo y crecimiento sanos.
-</p>  
-</div>
-</section>
-
-
-<section class="galeria-tres-columnas">
-    <div class="container">        
-        <div class="galeria-grid">
-
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/9d/4a/55/9d4a5565d95dccbc75eec0bd03b6d155.jpg" alt="Parto7">
-            </div>
-
-
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/5d/0a/6b/5d0a6bc2962c3d26508306d01b0cf437.jpg" alt="Parto8">
-            </div>
-
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/d7/22/1b/d7221bf78a251e8543f1d6c54437ea7f.jpg" alt="Parto9">
+<main class="caja-unica pagina-parto">
+    <section class="hero-parto">
+        <div>
+            <span class="badge-parto">Guia informativa</span>
+            <h1>Etapas del trabajo de parto y del parto</h1>
+            <p>
+                El trabajo de parto suele avanzar por fases. Conocer que ocurre en cada etapa
+                puede ayudarte a sentirte mas preparada, tranquila y acompanada durante el proceso.
+            </p>
+            <div class="hero-resumen" aria-label="Resumen de etapas">
+                <span>1. Dilatacion</span>
+                <span>2. Nacimiento</span>
+                <span>3. Placenta</span>
             </div>
         </div>
+        <img class="imagen-parto" src="https://i.pinimg.com/736x/0c/c8/9a/0cc89a50c0236797250ce9d3aaeb9034.jpg" alt="Bebe recien nacido">
+    </section>
+
+    <section class="bloque-parto">
+        <h2 class="titulo-seccion">Vista general</h2>
+        <p class="subtitulo-parto">
+            Cada nacimiento es distinto. Los tiempos pueden variar, pero estas tres etapas describen
+            el recorrido mas comun del trabajo de parto.
+        </p>
+        <div class="grid-etapas">
+            <article class="tarjeta-parto">
+                <h3>Etapa 1</h3>
+                <p>Empiezan las contracciones persistentes y el cuello del utero se borra y dilata.</p>
+            </article>
+            <article class="tarjeta-parto">
+                <h3>Etapa 2</h3>
+                <p>El cuello del utero esta completamente dilatado y llega el momento de pujar.</p>
+            </article>
+            <article class="tarjeta-parto">
+                <h3>Etapa 3</h3>
+                <p>Despues del nacimiento del bebe, el cuerpo expulsa la placenta.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Etapa 1: inicio y trabajo de parto activo</h2>
+                <p>
+                    La primera etapa ocurre cuando comienzas a sentir contracciones persistentes.
+                    Estas se vuelven mas intensas y frecuentes con el tiempo. Las contracciones
+                    ayudan a que el cuello del utero se abra, se ablande, se acorte y se afine.
+                </p>
+                <p>
+                    Esta etapa suele ser la mas larga y se divide en dos fases: inicio del trabajo
+                    de parto y trabajo de parto activo.
+                </p>
+            </div>
+            <img class="imagen-parto" src="https://i.pinimg.com/1200x/7b/38/df/7b38dfb0a446a91e04bcaf898e17aa33.jpg" alt="Mujer embarazada descansando">
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <h2 class="titulo-seccion">Inicio del trabajo de parto</h2>
+        <div class="grid-tres">
+            <article class="tarjeta-parto">
+                <h3>Que ocurre</h3>
+                <p>
+                    En esta fase, tambien llamada trabajo de parto latente, el cuello del utero se
+                    abre menos de 6 centimetros. Las contracciones pueden ser leves e irregulares.
+                </p>
+                <p>
+                    Tambien podria aparecer una secrecion rosada o con un poco de sangre, que suele
+                    corresponder al tapon mucoso.
+                </p>
+            </article>
+            <img class="imagen-parto" src="https://i.pinimg.com/736x/67/29/0c/67290cd1eda48d857404e94eabafb79d.jpg" alt="Preparacion para el parto">
+            <article class="tarjeta-parto">
+                <h3>Duracion y cuidados</h3>
+                <p>
+                    No es predecible: puede durar horas o dias y suele ser mas corta en personas que
+                    ya tuvieron un bebe.
+                </p>
+                <p>
+                    Trata de mantenerte relajada y consulta con tu profesional de salud cuando debas
+                    ir al hospital o centro de maternidad.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <h2 class="titulo-seccion">Para sentirte mas comoda</h2>
+        <div class="grid-dos">
+            <div class="nota-parto">
+                <p>
+                    Si no tienes un embarazo de alto riesgo, es posible que pases gran parte del inicio
+                    del trabajo de parto en casa. Si se rompe la fuente o tienes sangrado vaginal
+                    abundante, comunicate de inmediato con tu profesional de atencion medica.
+                </p>
+            </div>
+            <ul class="lista-cuidada">
+                <li>Da un paseo suave.</li>
+                <li>Toma una ducha o un bano tibio.</li>
+                <li>Escucha musica relajante.</li>
+                <li>Practica tecnicas de respiracion o relajacion.</li>
+                <li>Cambia de posicion cuando lo necesites.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <h2 class="titulo-seccion">Trabajo de parto activo</h2>
+        <p class="subtitulo-parto">
+            Durante esta fase, el cuello del utero se abre de 6 a 10 centimetros. Las contracciones
+            se vuelven mas intensas, seguidas y constantes.
+        </p>
+        <div class="grid-tres">
+            <article class="tarjeta-parto">
+                <h3>Sensaciones comunes</h3>
+                <p>
+                    Puede haber calambres en las piernas, malestar estomacal, presion en la espalda
+                    o ruptura de la fuente. Si aun no vas al lugar donde daras a luz, este suele ser
+                    el momento.
+                </p>
+            </article>
+            <img class="imagen-parto" src="https://i.pinimg.com/736x/8d/d5/35/8dd5350225ec87fdb75a483d90009dc9.jpg" alt="Acompanamiento durante el parto">
+            <article class="tarjeta-parto">
+                <h3>Apoyo y alivio</h3>
+                <p>
+                    Pide apoyo a tu acompanante y al equipo medico. Si deseas analgesicos o anestesia,
+                    puedes hablarlo con el personal que te atiende.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Que puedes hacer en esta fase</h2>
+                <p>
+                    El trabajo de parto activo suele durar de 4 a 8 horas o mas. En promedio, el
+                    cuello del utero se dilata cerca de 1 centimetro por hora, aunque puede variar.
+                </p>
+                <ul class="lista-cuidada">
+                    <li>Cambia de posicion.</li>
+                    <li>Usa una pelota de parto si te resulta comoda.</li>
+                    <li>Toma una ducha o bano con agua tibia.</li>
+                    <li>Camina y descansa para respirar durante las contracciones.</li>
+                    <li>Pide un masaje suave entre contracciones.</li>
+                </ul>
+            </div>
+            <img class="imagen-parto" src="https://i.pinimg.com/736x/02/ab/dd/02abddb5070bd60cbd07116df4d919d9.jpg" alt="Preparacion y apoyo para el parto">
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <div class="grid-dos">
+            <img class="imagen-parto" src="https://i.pinimg.com/236x/5b/68/48/5b6848628890c2ce7f4bfda1e0625578.jpg" alt="Maternidad y parto">
+            <div>
+                <h2 class="titulo-seccion">Borramiento y dilatacion</h2>
+                <p>
+                    Durante la primera etapa, el cuello del utero se expande y se afina para permitir
+                    que el bebe avance hacia el canal de parto. Para un parto vaginal, la dilatacion
+                    suele llegar a 10 centimetros y el borramiento al 100 %.
+                </p>
+                <p>
+                    La parte final del trabajo de parto activo puede sentirse intensa. Las contracciones
+                    pueden durar de 60 a 90 segundos y presentarse con mayor frecuencia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Etapa 2: nacimiento de tu bebe</h2>
+                <p>
+                    Durante la segunda etapa del trabajo de parto, llega el momento de pujar y dar a
+                    luz a tu bebe. Puede tomar desde algunos minutos hasta algunas horas.
+                </p>
+                <p>
+                    Tu profesional de atencion medica puede pedirte que pujes durante cada contraccion
+                    o indicarte cuando hacerlo. Tambien puedes probar posiciones distintas hasta
+                    encontrar una que te resulte comoda.
+                </p>
+            </div>
+            <img class="imagen-parto" src="https://i.pinimg.com/1200x/27/ef/c6/27efc6476acf69ebd931b8cc3a42d56e.jpg" alt="Nacimiento del bebe">
+        </div>
+    </section>
+
+    <section class="bloque-parto">
+        <h2 class="titulo-seccion">Durante el nacimiento</h2>
+        <div class="grid-dos">
+            <article class="tarjeta-parto">
+                <h3>Que puede ayudar</h3>
+                <p>
+                    Puedes pujar en cuclillas, sentada, arrodillada o apoyada sobre manos y rodillas.
+                    El equipo medico verificara el progreso y te guiara durante el proceso.
+                </p>
+            </article>
+            <article class="tarjeta-parto">
+                <h3>Despues de salir el bebe</h3>
+                <p>
+                    Tras la salida de la cabeza, salen los hombros y el resto del cuerpo. Si no hay
+                    complicaciones, el equipo puede esperar unos segundos o minutos antes de cortar
+                    el cordon umbilical.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="galeria-parto" aria-label="Galeria sobre el nacimiento">
+        <img src="https://i.pinimg.com/736x/9d/4a/55/9d4a5565d95dccbc75eec0bd03b6d155.jpg" alt="Primeros momentos del bebe">
+        <img src="https://i.pinimg.com/736x/5d/0a/6b/5d0a6bc2962c3d26508306d01b0cf437.jpg" alt="Cuidado del recien nacido">
+        <img src="https://i.pinimg.com/736x/d7/22/1b/d7221bf78a251e8543f1d6c54437ea7f.jpg" alt="Maternidad despues del parto">
+    </section>
+
+    <section class="bloque-parto">
+        <div class="grid-dos">
+            <img class="imagen-parto" src="https://i.pinimg.com/736x/57/ac/4b/57ac4bbc62e834012619a32a91235a7a.jpg" alt="Placenta y nacimiento">
+            <div>
+                <h2 class="titulo-seccion">Etapa 3: expulsion de la placenta</h2>
+                <p>
+                    Despues de que nazca tu bebe, probablemente sientas alivio y puedas sostenerlo.
+                    Aun queda una ultima parte: la expulsion de la placenta.
+                </p>
+                <p>
+                    Por lo general ocurre dentro de los 30 minutos posteriores al nacimiento. Las
+                    contracciones leves ayudan a que la placenta se desplace hacia el canal de parto.
+                </p>
+                <p>
+                    El equipo medico revisara que la placenta este completa, controlara el sangrado
+                    y reparara cualquier desgarro si fuera necesario.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="nota-parto">
+        <p>
+            Esta informacion es una guia general. Siempre sigue las indicaciones de tu profesional de
+            salud, especialmente si tu embarazo es de alto riesgo, tienes dolor intenso, sangrado
+            abundante, fiebre, ruptura de fuente o disminucion de movimientos del bebe.
+        </p>
+    </section>
+
+    <div class="acciones-parto">
+        <a href="blog.html" class="btn btn-primary">SALIR</a>
     </div>
-</section>
-
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/736x/57/ac/4b/57ac4bbc62e834012619a32a91235a7a.jpg" alt="Parto11">
-</div>
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">Etapa 3: Expulsión de la placenta </h2>
-
-
-<p>
-Después de que nazca su bebé, probablemente sentirá una gran sensación de alivio. Podrá sostener al bebé en sus brazos o sobre su abdomen. Disfrute del momento. Sin embargo, todavía queda algo más por hacer. Durante la tercera etapa del trabajo de parto, se expulsa la placenta.
-</p>
-
-
-<p>
-<strong>Cuánto tiempo dura:</strong> Por lo general, la placenta se expulsa en un período de 30 minutos.
-<br>
-<strong>Qué puede hacer:</strong> ¡Relájese! A estas alturas, es probable que dedique toda su atención al bebé. Puede que no se dé cuenta de lo que pasa a su alrededor. Si lo desea, intente amamantar a su bebé.
-
-Después del parto, siguen las contracciones leves, que son seguidas y menos dolorosas. Las contracciones ayudan a que la placenta se desplace hacia el canal de parto. Pujará cuidadosamente una vez más para expulsar la placenta. Es posible que le administren medicamentos antes o después de la expulsión de la placenta para estimular las contracciones uterinas y minimizar el sangrado.
-
-El profesional de atención médica examina la placenta para asegurarse de que esté entera. Si queda un poco de placenta en el útero, se debe retirar para prevenir sangrados e infección. Si le interesa, pida ver la placenta.
-
-Después de que la expulse, el útero continuará contrayéndose para regresar a su tamaño normal.
-
-Es posible que un miembro del equipo de atención médica le masajee el abdomen. Esto ayuda a que el útero se contraiga para disminuir el sangrado.
-
-El profesional de atención médica revisa si tiene algún desgarro en la zona vaginal para repararlo. Si no le aplicaron la anestesia epidural, recibirá una inyección de anestésico local en el área que se reparará.
-</p>
-</div>
-</div>
-</div>
-</section>
-
-
-
-
-
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="blog.html" class="btn btn-primary">SALIR</a>
-</div>
-</center>
-
-<br><br>
-
-
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
 </body>
 </html>
-
-

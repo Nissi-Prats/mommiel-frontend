@@ -3,230 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutricion - MomMiel</title>
+    <title>Nutricion en el embarazo - MomMiel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pagina-nutricion {
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        .pagina-nutricion,
+        .pagina-nutricion * {
+            box-sizing: border-box;
+        }
+
+        .hero-nutricion,
+        .bloque-nutricion,
+        .tarjeta-nutricion,
+        .nota-nutricion,
+        .imagen-nutricion {
+            border-radius: 24px;
+        }
+
+        .hero-nutricion {
+            display: grid;
+            grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #fff8f6 0%, #ffffff 50%, #eef4e9 100%);
+            border: 1px solid rgba(184, 139, 139, .18);
+        }
+
+        .hero-nutricion h1 {
+            margin: 14px 0 18px;
+            color: #B88B8B;
+            font-size: clamp(34px, 5vw, 54px);
+            line-height: 1.08;
+            text-align: left;
+        }
+
+        .pagina-nutricion p,
+        .pagina-nutricion li {
+            color: #5f514e;
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .badge-nutricion {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .imagen-nutricion {
+            width: 100%;
+            min-height: 330px;
+            max-height: 470px;
+            object-fit: cover;
+            box-shadow: 0 16px 34px rgba(105, 82, 75, .14);
+        }
+
+        .bloque-nutricion {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid rgba(184, 139, 139, .15);
+            box-shadow: 0 12px 30px rgba(105, 82, 75, .08);
+        }
+
+        .titulo-seccion {
+            margin: 0 0 18px;
+            color: #B88B8B;
+            font-size: clamp(28px, 4vw, 40px);
+            line-height: 1.18;
+            text-align: left;
+        }
+
+        .subtitulo-nutricion {
+            max-width: 840px;
+            margin: 0 0 24px;
+        }
+
+        .grid-dos,
+        .grid-tres,
+        .grid-cuatro {
+            display: grid;
+            gap: 22px;
+        }
+
+        .grid-dos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+        }
+
+        .grid-tres {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-cuatro {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .tarjeta-nutricion {
+            padding: 24px;
+            background: #fffaf8;
+            border: 1px solid rgba(184, 139, 139, .14);
+        }
+
+        .tarjeta-nutricion h3 {
+            margin: 0 0 12px;
+            color: #9b6e6e;
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        .tarjeta-nutricion p:last-child,
+        .bloque-nutricion p:last-child,
+        .nota-nutricion p:last-child {
+            margin-bottom: 0;
+        }
+
+        .porcentaje {
+            display: inline-flex;
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #f4dfe2;
+            color: #8f6262;
+            font-weight: 700;
+        }
+
+        .lista-cuidada {
+            display: grid;
+            gap: 10px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .lista-cuidada li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .lista-cuidada li::before {
+            content: "\2665";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #B88B8B;
+            font-weight: 700;
+        }
+
+        .nota-nutricion {
+            padding: 24px;
+            background: #f8eee9;
+            border-left: 5px solid #B88B8B;
+        }
+
+        .resumen-nutricion {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .resumen-nutricion span {
+            display: block;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .78);
+            color: #8f6262;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .galeria-nutricion {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .galeria-nutricion img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(105, 82, 75, .12);
+        }
+
+        .acciones-nutricion {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 18px;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-cuatro {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-nutricion,
+            .grid-dos,
+            .grid-tres,
+            .grid-cuatro,
+            .galeria-nutricion,
+            .resumen-nutricion {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-nutricion,
+            .bloque-nutricion {
+                padding: 24px;
+            }
+
+            .imagen-nutricion,
+            .galeria-nutricion img {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
 <header>
-<nav class="navbar active">
-<div class="logo">✿ MomMiel</div>
-<ul class="hero-buttons">
-<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
-</ul>
-</nav>
+    <nav class="navbar active">
+        <div class="logo">✿ MomMiel</div>
+        <ul class="hero-buttons">
+            <li><a href="blog.html" class="btn btn-primary">Volver</a></li>
+        </ul>
+    </nav>
 </header>
 
-
-
-<section class="seccion-articulo-destacado">
-<div class="container">
-<div class="tarjeta-articulo-horizontal">
-            
-<div class="columna-imagen-articulo">
-<img src="https://i.pinimg.com/1200x/88/8e/65/888e6525c78ecc8c0cb65fd365e0e000.jpg" alt="embarazada alimentándose">
-</div>
-            
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">
-Beneficios de llevar una dieta balanceada en el embarazoa
-</h2>
-<p class="extracto-articulo">
-Una sana alimentación en el embarazo es la clave para el desarrollo del bebé y la salud materna. Aprende cómo llevar una nutrición óptima para un embarazo saludable.
-</p>
-</div>
-</div>
-</div>
-</section>
-
-
-<section class="seccion-destacada">
-<div class="tarjeta-ancha">
-        
-<p>
-Una dieta balanceada y una sana alimentación durante el embarazo ofrece a tu cuerpo los nutrimentos que tú y tu bebé necesitan como las proteínas, hidratos de carbono, grasas, vitaminas, minerales, fibra y agua. También tendrás el balance perfecto entre el consumo de proteínas, hidratos de carbono y grasas. Tu ingesta diaria de calorías deberá dividirse de la siguiente manera:
-</p>
-<br>
-
-
-<div class="galeria-grid">
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-Del 12 al 15% del total de calorías deberá estar formado por proteínas, de las cuales la mitad deberán ser de origen animal y la otra mitad de origen vegetal. Tus necesidades proteicas deberán estar cubiertas por una o dos raciones de carne, pescado o huevo por día, 3 o 4 productos lácteos al día y una ración de vegetales y cereales deberán estar presentes en las tres comidas principales.
-</p>
-</div>
-</div>
-
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-Alrededor del 50 al 55% deberá provenir de hidratos de carbono, especialmente cereales, frutas y vegetales (5 raciones por día), reduciendo azúcares. Comienza el desayuno con un jugo de fruta natural con cereales o una rebanada de pan. No olvides comer un poco de pan junto con tu ensalada o tu plato de carne y vegetales a la hora de la comida. Como colación, una barra de cereales y para cenar, un plato de pasta con verduras.
-</p>
-</div>
-</div>
-
-<div class="galeria-item">
-<div class="galeria-info">
-<p>
-Del 30 al 35% les corresponde a las grasas. Las grasas vegetales como aceite de oliva o de semillas de girasol son preferibles para cocinar y aderezar. Y aunque la crema y la mantequilla son deliciosas, reserva estas para el pan de la mañana o en pequeñas cantidades para la pasta o el arroz.
-</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-
-<section class="galeria-tres-columnas">
-    <div class="container">        
-        <div class="galeria-grid">
-
-            <!-- Tarjeta de Imagen 1 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/4c/50/78/4c50782ec3d13f844b43cca46a69bf08.jpg" alt="Plato1">
-            </div>
-
-            <!-- Tarjeta de Imagen 2 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/1200x/d9/b1/de/d9b1de1c8704cf40a372d1469d4af4bc.jpg" alt="Blanco">
-            </div>
-
-            <!-- Tarjeta de Imagen 3 -->
-            <div class="galeria-item">
-                <img src="https://i.pinimg.com/736x/b0/2c/de/b02cde30293f7cb1bb00bdc744b3edde.jpg" alt="Vasos">
+<main class="caja-unica pagina-nutricion">
+    <section class="hero-nutricion">
+        <img class="imagen-nutricion" src="https://i.pinimg.com/1200x/88/8e/65/888e6525c78ecc8c0cb65fd365e0e000.jpg" alt="Mujer embarazada alimentandose de forma saludable">
+        <div>
+            <span class="badge-nutricion">Alimentacion prenatal</span>
+            <h1>Beneficios de llevar una dieta balanceada en el embarazo</h1>
+            <p>
+                Una alimentacion saludable durante el embarazo ayuda al desarrollo del bebe y al
+                bienestar de la madre. La clave esta en elegir alimentos variados, suficientes y ricos
+                en nutrientes.
+            </p>
+            <div class="resumen-nutricion" aria-label="Resumen nutricional">
+                <span>Proteinas</span>
+                <span>Carbohidratos</span>
+                <span>Grasas saludables</span>
             </div>
         </div>
+    </section>
+
+    <section class="bloque-nutricion">
+        <h2 class="titulo-seccion">Que aporta una dieta balanceada</h2>
+        <p class="subtitulo-nutricion">
+            Una buena alimentacion ofrece proteinas, hidratos de carbono, grasas, vitaminas,
+            minerales, fibra y agua. Estos nutrimentos ayudan a cubrir las necesidades de tu cuerpo
+            y las de tu bebe durante el embarazo.
+        </p>
+        <div class="grid-tres">
+            <article class="tarjeta-nutricion">
+                <span class="porcentaje">12% a 15%</span>
+                <h3>Proteinas</h3>
+                <p>
+                    Pueden venir de carnes, pescado, huevo, lacteos, leguminosas, vegetales y
+                    cereales. Son importantes para el crecimiento y la formacion de tejidos.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <span class="porcentaje">50% a 55%</span>
+                <h3>Hidratos de carbono</h3>
+                <p>
+                    Se recomienda priorizar cereales, frutas y vegetales, reduciendo azucares. Aportan
+                    energia y fibra para el dia a dia.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <span class="porcentaje">30% a 35%</span>
+                <h3>Grasas</h3>
+                <p>
+                    Las grasas vegetales, como aceite de oliva o de semillas, son buenas opciones para
+                    cocinar y aderezar en cantidades moderadas.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="galeria-nutricion" aria-label="Galeria de alimentacion saludable">
+        <img src="https://i.pinimg.com/736x/4c/50/78/4c50782ec3d13f844b43cca46a69bf08.jpg" alt="Plato saludable">
+        <img src="https://i.pinimg.com/1200x/d9/b1/de/d9b1de1c8704cf40a372d1469d4af4bc.jpg" alt="Alimentos frescos">
+        <img src="https://i.pinimg.com/736x/b0/2c/de/b02cde30293f7cb1bb00bdc744b3edde.jpg" alt="Bebidas y alimentos nutritivos">
+    </section>
+
+    <section class="bloque-nutricion">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Comidas diarias y colaciones</h2>
+                <p>
+                    Para mantener una alimentacion saludable, procura hacer al menos tres comidas al
+                    dia y evita saltarte el desayuno. Esta primera comida te ayuda a iniciar el dia
+                    con energia.
+                </p>
+                <p>
+                    Tambien puedes incluir una o dos colaciones entre comidas, buscando que sean
+                    equilibradas y nutritivas.
+                </p>
+            </div>
+            <div class="nota-nutricion">
+                <p>
+                    Una colacion sencilla puede combinar cereal integral, fruta y una fuente de
+                    proteina, como queso fresco, yogurt o frutos secos en una cantidad adecuada.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bloque-nutricion">
+        <h2 class="titulo-seccion">Un desayuno completo puede incluir</h2>
+        <div class="grid-cuatro">
+            <article class="tarjeta-nutricion">
+                <h3>Lacteo</h3>
+                <p>Ayuda a aportar proteina y calcio para tu cuerpo y el desarrollo del bebe.</p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Cereales</h3>
+                <p>Contribuyen con fibra e hidratos de carbono para obtener energia.</p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Fruta</h3>
+                <p>Aporta vitaminas, agua y fibra. Puedes variar colores y tipos durante la semana.</p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Bebida</h3>
+                <p>La hidratacion es parte esencial de una alimentacion saludable.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-nutricion">
+        <h2 class="titulo-seccion">Tus nuevas necesidades nutrimentales</h2>
+        <p class="subtitulo-nutricion">
+            Durante el embarazo aumentan las necesidades de algunos nutrimentos. Tu profesional de
+            salud puede ayudarte a definir si necesitas suplementos y en que dosis.
+        </p>
+        <div class="grid-cuatro">
+            <article class="tarjeta-nutricion">
+                <h3>Acido folico</h3>
+                <p>
+                    Es importante para el desarrollo del sistema nervioso del bebe, especialmente al
+                    inicio del embarazo. Se encuentra en hojas verdes, leguminosas, yema de huevo,
+                    algunos quesos fermentados y citricos.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Hierro</h3>
+                <p>
+                    Ayuda a producir hemoglobina y transportar oxigeno. Puede encontrarse en carne
+                    roja, huevo, higado, cereales fortificados, aves, atun y granos enteros.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Calcio</h3>
+                <p>
+                    Es necesario para la formacion del esqueleto del bebe. La leche y sus derivados
+                    son fuentes ricas; la vitamina D favorece su absorcion.
+                </p>
+            </article>
+            <article class="tarjeta-nutricion">
+                <h3>Vitamina C</h3>
+                <p>
+                    Apoya el sistema inmune y mejora la absorcion del hierro. Esta en frutas como
+                    naranja, kiwi, mango o papaya, y verduras como brocoli, pimiento y espinaca.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="bloque-nutricion">
+        <div class="grid-dos">
+            <div>
+                <h2 class="titulo-seccion">Conserva mejor los nutrientes</h2>
+                <p>
+                    Las vitaminas y minerales pueden perderse con el tiempo, la luz, el aire o una
+                    coccion inadecuada. Comprar frutas y verduras frescas y consumirlas pronto ayuda
+                    a aprovechar mejor sus propiedades.
+                </p>
+            </div>
+            <ul class="lista-cuidada">
+                <li>Guarda frutas y verduras en un lugar fresco o en el refrigerador.</li>
+                <li>Protege los alimentos de la luz directa y del aire.</li>
+                <li>Lava y desinfecta antes de consumir, sin dejarlos demasiado tiempo en remojo.</li>
+                <li>Prefiere cocciones suaves cuando sea posible.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="nota-nutricion">
+        <p>
+            La alimentacion durante el embarazo no se trata de comer perfecto, sino de sumar opciones
+            nutritivas con constancia. Si tienes nauseas, restricciones, anemia, diabetes gestacional
+            u otra condicion, busca orientacion personalizada.
+        </p>
+    </section>
+
+    <div class="acciones-nutricion">
+        <a href="Nutricion2.html" class="btn btn-primary">SIGUIENTE</a>
     </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="seccion-etapas-bebe">
-<div class="container-etapas">
-        
-<div class="lista-tarjetas-etapas">
-
-<div class="tarjeta-etapa-individual">
-<p>
-Para alcanzar tus objetivos en la alimentación saludable para embarazadas, debes cumplir con al menos tres comidas diarias: nunca te saltes una comida, mucho menos el desayuno. Esta es la primera comida que te da toda la energía para empezar el día y lo mejor es que contenga lo siguiente:
-</p>
-
-<p>❤︎︎ 1 producto lácteo para obtener proteína y calcio</p>
-<p>❤︎︎ 1 ración de cereales para cubrir la fibra e hidratos de carbono necesarios</p>
-<p>❤︎︎ 1 porción de fruta para las vitaminas y fibra</p>
-<p>❤︎︎ 1 bebida para hidratarte</p>
-
-<p>Date el gusto de una o dos colaciones entre comidas. ¡Asegúrate de balancearlas bien! Evita alimentos dulces, mejor sustitúyelos por cereales, fruta y proteína. Por ejemplo: 1 ración de queso blanco + 1 barra de cereal + 1 manzana, y si lo quieres más sabroso, puedes preparar 1 rebanada de pan de grano entero con un poco de queso + fresas.
-</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="seccion-articulo-destacado">
-<div class="container">  
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">
-Tus nuevas necesidades nutrimentales
-</h2>
-<p>
-Durante el embarazo, es importante incrementar algunos nutrimentos.
-<br>
-El ácido fólico es muy importante para el desarrollo del sistema nervioso de tu bebé, particularmente al comienzo del embarazo. Este mineral puedes encontrarlo en vegetales de hoja verde, leguminosas, yema de huevo y algunos quesos fermentados, pero también en algunos cítricos. Generalmente, los médicos prescriben el suplemento de este mineral desde antes de la concepción.
-<br>
-Otro mineral muy importante es el hierro porque es el encargado de producir la hemoglobina y de llevar oxígeno a las células. Tus requerimientos de hierro son de 16 mg por día antes del embarazo y se incrementará hasta 30 mg por día durante el último trimestre. Puedes encontrarlo en la carne roja, huevo, hígado de res, cereales fortificados, aves, atún y granos enteros.
-<br>
-El calcio es necesario para la formación del esqueleto de tu bebé. Las fuentes más ricas de calcio son la leche y derivados lácteos. Al tomarlo junto con alimentos que contengan vitamina D ayudará a que se fije bien en tu organismo.
-<br>
-La vitamina C juega un papel importante para el desarrollo del sistema inmune, también ayuda para mejorar la absorción del hierro. Para que consumas una buena cantidad de este, come frutas como melón, naranja, toronja, kiwi, mango o papaya, y verduras como brócoli, pimiento, espinaca y jitomate todos los días.
-<br>
-Estas son algunas vitaminas y comidas para un embarazo saludable que no te pueden faltar en tu dieta.
-</p>
-</div>
-
-
-
-<div class="columna-texto-articulo">
-<h2 class="titulo-articulo">
-Conserva los nutrientes
-</h2>
-
-Las vitaminas y minerales son muy delicados en cuestión de conservarlos y cocinarlos sin que se pierdan sus propiedades. Es bueno conocer alternativas para conservarlos de la mejor manera. Compra frutas y verduras lo más frescas posible, ya que algo se pierde al momento de la cosecha.
-
-Protege el alimento del aire y la luz directa, almacena en medio del refrigerador y consúmelo lo antes posible. Lava y desinfecta frutas y verduras antes de consumirlas, pero no las dejes en remojo para que no se pierdan las vitaminas en el agua.
-
-</div>
-</div>
-</div>
-</section>
-
-</div>
-</section>
-
-
-
-
-<br><br>
-
-<center>
-<div class="hero-buttons">
-<a href="Nutricion2.html" class="btn btn-primary">SIGUIENTE</a>
-</div>
-</center>
-
-<br><br>
-
-
+</main>
 
 <footer>
-<div class="container footer-grid">
-<div>
-<h3>✿ MomMiel</h3>
-<p>Tu compañera durante cada etapa de la maternidad.</p>
-</div>
-<div>
-<h4>Enlaces</h4>
-<ul>
-<li>Inicio</li>
-<li>Blog</li>
-<li>Tienda</li>
-</ul>
-</div>
-<div>
-<h4>Contacto</h4>
-<p>contacto@mommiel.com</p>
-<p>León, Guanajuato</p>
-</div>
-</div>
-<div class="copyright">© 2026 MomMiel</div>
+    <div class="container footer-grid">
+        <div>
+            <h3>✿ MomMiel</h3>
+            <p>Tu companera durante cada etapa de la maternidad.</p>
+        </div>
+        <div>
+            <h4>Enlaces</h4>
+            <ul>
+                <li>Inicio</li>
+                <li>Blog</li>
+                <li>Tienda</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>contacto@mommiel.com</p>
+            <p>Leon, Guanajuato</p>
+        </div>
+    </div>
+    <div class="copyright">© 2026 MomMiel</div>
 </footer>
-
-
-
-
-
 </body>
 </html>
