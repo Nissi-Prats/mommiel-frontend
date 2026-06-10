@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | MomMiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.blog-hero{padding:160px 8% 80px;background:linear-gradient(135deg,#F8E5E5,#FFF9F5,#F2E7DC);text-align:center;}
+.blog-hero h1{font-size:55px;margin-bottom:20px;color:#5D4B43;}
+.blog-hero p{font-size:18px;max-width:800px;margin:auto;line-height:1.8;color:#8A766D;}
+.buscador{margin-top:40px;display:flex;justify-content:center;}
+.buscador input{width:600px;max-width:90%;padding:18px;border:none;border-radius:50px;font-size:16px;box-shadow:0 10px 25px rgba(0,0,0,.08);}
+.categorias{padding:80px 0;background:#FFF9F5;}
+.categorias-grid{width:90%;max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;}
+.categoria{background:white;padding:30px;border-radius:25px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.06);transition:.3s;cursor:pointer;}
+.categoria:hover{transform:translateY(-8px);}
+.categoria h3{margin-top:15px;color:#B88B8B;}
+.icono{font-size:50px;}
+.destacado{padding:100px 0;background:#F8E5E5;}
+.destacado-container{width:90%;max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.destacado img{width:100%;border-radius:25px;}
+.destacado-info{background:white;padding:40px;border-radius:25px;box-shadow:0 10px 30px rgba(0,0,0,.06);}
+.destacado-info span{color:#B88B8B;font-weight:600;}
+.destacado-info h2{margin:20px 0;font-size:38px;color:#5D4B43;}
+.destacado-info p{line-height:1.9;margin-bottom:25px;}
+.btn-blog{display:inline-block;padding:14px 30px;background:#C8A98D;color:white;text-decoration:none;border-radius:12px;}
+.articulos{padding:100px 0;background:#FFF9F5;}
+.articulos h2{text-align:center;font-size:42px;margin-bottom:50px;}
+.articulos-grid{width:90%;max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;}
+.articulo{background:white;border-radius:25px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.06);transition:.3s;}
+.articulo:hover{transform:translateY(-10px);}
+.articulo img{width:100%;height:240px;object-fit:cover;}
+.articulo-info{padding:25px;}
+.articulo-info span{color:#B88B8B;font-size:14px;font-weight:600;}
+.articulo-info h3{margin:15px 0;color:#5D4B43;}
+.articulo-info p{line-height:1.8;margin-bottom:20px;}
+.leer-mas{text-decoration:none;color:#B88B8B;font-weight:600;}
+@media(max-width:900px){
+.destacado-container{grid-template-columns:1fr;}
+.blog-hero h1{font-size:40px;}
+}
+</style>
+</head>
+<body>
+<nav class="navbar active">
+<div class="logo">✿ MomMiel</div>
+<ul class="hero-buttons">
+<li><a href="../index.html" class="btn btn-primary">SALIR </a></li>
+</ul>
+</nav>
+
+<section class="blog-hero">
+<h1>Consejos y Guías para Mamás</h1>
+<p>Descubre información útil sobre embarazo, lactancia, nutrición y cuidado del bebé para acompañarte en cada etapa.</p>
+</section>
+
+<section class="categorias">
+<div class="categorias-grid">
+<div class="categoria"><div class="icono">❤︎</div><h3>Primer Trimestre</h3> 
+<br>
+<div class="hero-buttons">
+<a href="1ertrimestre.html" class="btn btn-primary">VER</a>
+</div>
+</div>
+
+<div class="categoria"><div class="icono">❤︎</div><h3>Segundo Trimestre</h3>
+<br>
+<div class="hero-buttons">
+<a href="2dotrimestre.html" class="btn btn-primary">VER</a>
+</div>
+</div>
+
+<div class="categoria"><div class="icono">❤︎</div><h3>Tercer Trimestre</h3>
+<br><br>
+<div class="hero-buttons">
+<a href="3ertrimestre.html" class="btn btn-primary">VER</a>
+</div>
+</div>
+
+
+<div class="categoria"><div class="icono">❤︎</div><h3>Lactancia</h3>
+<br><br>
+<div class="hero-buttons">
+<a href="Lactancia.html" class="btn btn-primary">VER</a>
+</div>
+</div>
+
+<div class="categoria"><div class="icono">❤︎</div><h3>Nutrición</h3>
+<br><br>
+<div class="hero-buttons">
+<a href="Nutricion.html" class="btn btn-primary">VER</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="destacado">
+<div class="destacado-container">
+<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200">
+<div class="destacado-info">
+<span>ARTÍCULO DESTACADO</span>
+<h2>7 recomendaciones para tener un embarazo saludable</h2>
+<p>Todas las mujeres que están embarazadas o desean estarlo, buscan vivir este momento lo más saludable posible para evitar complicaciones durante y después del parto.
+</p>
+<p>
+A continuación, te dejamos una serie de recomendaciones importantes:
+</p>
+<a href="7Consejos.html" class="btn-blog">Leer Artículo</a>
+</div>
+</div>
+</section>
+
+<section class="articulos">
+<h2>Artículos Recientes</h2>
+<div class="articulos-grid">
+<div class="articulo">
+<img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800">
+<div class="articulo-info">
+<h3>Etapas del trabajo de parto y del parto</h3>
+<p>Esto es lo que puede esperar durante las etapas del trabajo de parto y el parto, junto con algunos consejos para que el trabajo de parto sea más cómodo.</p>
+<a href="EtapasdelEmbarazo.html" class="leer-mas">Leer más →</a>
+</div>
+</div>
+
+<div class="articulo">
+<img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800">
+<div class="articulo-info">
+<h3>Medicamentos durante el embarazo</h3>
+<p>Puede ser difícil saber si un medicamento es seguro durante el embarazo.</p>
+<a href="Medicamentos.html" class="leer-mas">Leer más →</a>
+</div>
+</div>
+
+<div class="articulo">
+<img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800">
+<div class="articulo-info">
+<h3>Tiempos y recuperación postparto tras un parto natural</h3>
+<p>Uno de los momentos y experiencias más emocionantes y gratificantes.</p>
+<a href="Recuperacion.html" class="leer-mas">Leer más →</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container footer-grid">
+<div>
+<h3>✿ MomMiel</h3>
+<p>Tu compañera durante cada etapa de la maternidad.</p>
+</div>
+<div>
+<h4>Enlaces</h4>
+<ul>
+<li>Inicio</li>
+<li>Blog</li>
+<li>Tienda</li>
+</ul>
+</div>
+<div>
+<h4>Contacto</h4>
+<p>contacto@mommiel.com</p>
+<p>León, Guanajuato</p>
+</div>
+</div>
+<div class="copyright">© 2026 MomMiel</div>
+</footer>
+</body>
+</html>

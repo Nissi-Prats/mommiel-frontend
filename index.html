@@ -83,22 +83,34 @@
         <div class="etapas-grid">
             <div class="etapa-card">
                 <h3>Primer Trimestre</h3>
-                <p>Descubre los primeros cambios y cuidados importantes.</p>
+                <p>Descubre los primeros cambios y cuidados importantes.</p><br>
+                <div class="hero-buttons">
+                <a href="moduloInformativo/1ertrimestre.html" class="btn btn-primary">Ver Más</a>
+                </div>
             </div>
 
             <div class="etapa-card">
                 <h3>Segundo Trimestre</h3>
-                <p>Conoce el desarrollo de tu bebé y consejos de bienestar.</p>
+                <p>Conoce el desarrollo de tu bebé y consejos de bienestar.</p><br>
+                <div class="hero-buttons">
+                    <a href="moduloInformativo/2dotrimestre.html" class="btn btn-primary">Ver Más</a>
+                </div>
             </div>
 
             <div class="etapa-card">
                 <h3>Tercer Trimestre</h3>
-                <p>Prepárate para la llegada de tu bebé.</p>
+                <p>Prepárate para la llegada de tu bebé.</p><br>
+                <div class="hero-buttons">
+                    <a href="moduloInformativo/3ertrimestre.html" class="btn btn-primary">Ver Más</a>
+                </div>
             </div>
 
             <div class="etapa-card">
-                <h3>Recién Nacido</h3>
-                <p>Consejos sobre sueño, alimentación y cuidados.</p>
+                <h3>Etapas del Embarazo</h3>
+                <p>Descubre las diferentes etapas del embarazo y lo que puedes esperar en cada una.</p><br>
+                <div class="hero-buttons">
+                    <a href="moduloInformativo/EtapasdelEmbarazo.html" class="btn btn-primary">Ver Más</a>
+                </div>
             </div>
         </div>
     </div>
@@ -166,14 +178,14 @@
 const API_URL = "https://api-mommiel-1.onrender.com/api";
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. MENU HAMBURGUESA RESPONSIVO (Activa y desactiva el menú móvil)
+    //  MENU HAMBURGUESA RESPONSIVO (Activa y desactiva el menú móvil)
     const menuBtn = document.querySelector('.menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
     if (menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Cambia el icono de barras (☰) por una equis (✕) al estar abierto
+            // Cambia el icono de barras  por una equis al estar abierto
             menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
         });
 
@@ -186,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. CONTROL DE SESIÓN
+    // CONTROL DE SESIÓN
     const token = localStorage.getItem('token_mommiel');
     const nombre = localStorage.getItem('user_nombre');
     const rol = localStorage.getItem('user_rol');
@@ -218,13 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (btnHero) {
             btnHero.innerText = "Ir al Blog";
-            btnHero.href = "blog.html"; 
+            btnHero.href = "moduloInformativo/blog.html"; 
         }
     } else {
         if (liCarrito) liCarrito.style.display = 'none';
     }
 
-    // 3. DISPARAR LA CARGA DE PRODUCTOS POPULARES
+    // CARGA DE PRODUCTOS POPULARES
     cargarProductosPopulares();
 });
 
